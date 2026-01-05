@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech of Our Own</title>
     <style>
+        :root {
+            color-scheme: light;
+            --ink: #0f172a;
+            --muted: #475569;
+            --accent: #2563eb;
+            --accent-dark: #1e40af;
+            --surface: #ffffff;
+            --surface-alt: #f8fafc;
+            --border: #e2e8f0;
+            --shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,50 +24,343 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
+            font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--ink);
+            background: var(--surface-alt);
+            line-height: 1.6;
         }
 
-        .container {
-            text-align: center;
-            color: white;
-            max-width: 800px;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        header {
+            background: radial-gradient(circle at top left, #dbeafe, #ffffff 60%);
+            border-radius: 24px;
+            padding: 56px;
+            box-shadow: var(--shadow);
+            display: grid;
+            gap: 24px;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600;
         }
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .button {
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 999px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .button.secondary {
+            background: #ffffff;
+            color: var(--accent-dark);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+
+        section {
+            margin-top: 56px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
         }
 
         p {
-            font-size: 1.5rem;
-            line-height: 1.6;
-            font-weight: 300;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            color: var(--muted);
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .grid.two {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .grid.three {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 24px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .list {
+            margin-top: 12px;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+
+        .list li {
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 40px 0;
+        }
+
+        footer {
+            margin-top: 72px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 720px) {
+            header {
+                padding: 40px 28px;
             }
 
-            p {
-                font-size: 1.2rem;
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tech of Our Own</h1>
-        <p>The first tech coop owned by the users and employees. Building tech of our own.</p>
-    </div>
+    <main class="page">
+        <header>
+            <span class="tagline">Tech of Our Own</span>
+            <h1>Technology people can truly own—private, durable, and local-first.</h1>
+            <p>
+                Tech of Our Own is building non-extractive consumer technology that gives people control of their
+                devices, data, and intelligence. We start with OurBox, a local-first personal server and personal AI
+                system you can own outright.
+            </p>
+            <div class="hero-actions">
+                <a class="button" href="#mission">Mission &amp; Vision</a>
+                <a class="button secondary" href="#governance">Governance Model</a>
+            </div>
+        </header>
+
+        <section id="mission">
+            <div class="grid two">
+                <div class="card">
+                    <h2>Vision</h2>
+                    <p>
+                        A world where people own their technology—their devices, their data, and their intelligence—
+                        without surveillance, lock-in, or dependency on extractive companies.
+                    </p>
+                    <p>
+                        We want consumer technology to feel like tools you can trust: local-first, repairable,
+                        understandable, and built to serve human life for decades.
+                    </p>
+                </div>
+                <div class="card">
+                    <h2>Mission</h2>
+                    <p>
+                        Tech of Our Own exists to build non-extractive consumer technology that makes people more
+                        capable, more private, and more free.
+                    </p>
+                    <ul class="list">
+                        <li>Ship local-first products that keep personal data and computation under the user’s control.</li>
+                        <li>Build in public with open-source defaults, auditable security, and shared knowledge.</li>
+                        <li>Design for long life through repairability, upgrade paths, and long-term support.</li>
+                        <li>Refuse dependency business models: no subscriptions, no hostage mechanics, no data sales.</li>
+                        <li>Structure governance so users and workers are represented and benefit.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="who-we-are">
+            <h2>Who we are</h2>
+            <div class="grid two">
+                <div class="card">
+                    <h3>Stakeholder-led company</h3>
+                    <p>
+                        We are a mission-locked organization that recognizes three stakeholder groups: users, workers,
+                        and the founder. Users and workers are constitutionally represented in governance and share in
+                        the company’s success.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Governed for longevity</h3>
+                    <p>
+                        Our constitution and board operations documents define non-negotiables, transparent governance,
+                        and long-term stewardship so the company cannot drift into extraction or lock-in.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-do">
+            <h2>What we do</h2>
+            <div class="grid two">
+                <div class="card">
+                    <h3>OurBox, the first flagship</h3>
+                    <p>
+                        OurBox is our starting point: a local-first personal server and personal AI system that runs at
+                        home, keeps data private, and stays useful without a subscription.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Future product categories</h3>
+                    <p>
+                        The mission extends to any future product category where people need technology that respects
+                        them—phones, appliances, robotics, and beyond—while keeping ownership and autonomy intact.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Non-negotiables</h2>
+            <div class="grid three">
+                <div class="card">
+                    <h3>No subscriptions. Ever.</h3>
+                    <p>We will not charge recurring fees for consumer features, access, updates, or core functionality.</p>
+                </div>
+                <div class="card">
+                    <h3>Local-first forever</h3>
+                    <p>Core product functionality must work locally without reliance on TOOO-operated services.</p>
+                </div>
+                <div class="card">
+                    <h3>No hostage mechanics</h3>
+                    <p>Users are never forced to pay ongoing fees to access their devices, data, or safety features.</p>
+                </div>
+                <div class="card">
+                    <h3>User data is not a product</h3>
+                    <p>No sale of user data, no behavioral advertising, and no hidden telemetry.</p>
+                </div>
+                <div class="card">
+                    <h3>Open source by default</h3>
+                    <p>Core software is open-source with auditable security and reproducible processes.</p>
+                </div>
+                <div class="card">
+                    <h3>Right to repair</h3>
+                    <p>We design for durability, publish repair guidance, and support long-life product paths.</p>
+                </div>
+                <div class="card">
+                    <h3>Exit to self-sufficiency</h3>
+                    <p>Interoperability and exportability ensure people can operate without us over time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="governance">
+            <h2>Governance model</h2>
+            <div class="grid two">
+                <div class="card">
+                    <h3>Board of Stewards (7 seats)</h3>
+                    <ul class="list">
+                        <li>3 seats elected by users.</li>
+                        <li>3 seats elected by workers.</li>
+                        <li>1 Mission Guardian seat protecting the mission lock.</li>
+                    </ul>
+                    <p>
+                        Protected matters—like adding subscriptions, selling data, or weakening the mission lock—require
+                        approval from user stewards, worker stewards, and the Mission Guardian.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Board operating rules</h3>
+                    <ul class="list">
+                        <li>Meets at least every six months with clear quorum rules.</li>
+                        <li>Three standing committees: Security &amp; Privacy, Audit &amp; Sustainability, Governance &amp; Community.</li>
+                        <li>Transparent reporting on elections, reserves, and major votes.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Founder stewardship period</h2>
+            <div class="grid two">
+                <div class="card">
+                    <h3>10-year founding stewardship</h3>
+                    <p>
+                        The Founder serves as Founding Steward for 10 years, holding final authority over non-protected
+                        operational decisions to enable speed and ambition while honoring constitutional limits.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Limits still apply</h3>
+                    <p>
+                        Even during founder stewardship, protected matters and non-negotiables remain in force. The Board
+                        oversees protected decisions, dividend calculations, transparency obligations, and removal for
+                        cause.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Shared surplus &amp; transparency</h2>
+            <div class="grid two">
+                <div class="card">
+                    <h3>Annual dividend</h3>
+                    <p>
+                        Each year we publish a Dividend Pool: free cash flow minus required reserves and minimum
+                        reinvestment. The pool is split between founder (declining to zero over 30 years), users, and
+                        workers.
+                    </p>
+                </div>
+                <div class="card">
+                    <h3>Plain-language reporting</h3>
+                    <p>
+                        We publish annual governance reports, reserve status, dividend distributions, and high-level
+                        financial summaries so members can see how the mission is being upheld.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>
+                Tech of Our Own is building the next generation of consumer technology with privacy, autonomy, and
+                longevity at the core.
+            </p>
+        </footer>
+    </main>
 </body>
 </html>
