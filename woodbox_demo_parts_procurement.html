@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Build a Personal Server (Parts Walkthrough) — Tech of Our Own</title>
+
+  <!-- Keep this "hanging out there" without inviting search indexing -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    h1 { margin: 0 0 8px; }
+    .subtle { opacity: 0.8; margin: 0 0 16px; }
+    .video-wrap {
+      margin: 18px 0 18px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(127,127,127,0.25);
+    }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #000;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 12px 0 22px;
+    }
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    details {
+      border: 1px solid rgba(127,127,127,0.25);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    details > summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 12px 0 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Build a Personal Server (Parts Walkthrough)</h1>
+    <p class="subtle">
+      No ads. No third-party analytics. Just a video served from our own infrastructure.
+    </p>
+
+    <div class="video-wrap">
+      <video controls preload="metadata" playsinline>
+        <source src="https://media.techofourown.com/videos/woodbox_demo_parts_procurement_v1.mp4" type="video/mp4" />
+        Sorry — your browser doesn't support HTML5 video.
+      </video>
+    </div>
+
+    <div class="links">
+      <a href="https://media.techofourown.com/videos/woodbox_demo_parts_procurement_v1.mp4">Direct MP4 link</a>
+
+    </div>
+
+    <details>
+      <summary>Transcript</summary>
+      <pre>
+Okay, welcome. In this video, we are going to buy components to build a PC. And not just any PC.  This is a personal computer designed to enable you to free yourself from data centers and Apple  and Google and OpenAI and, you know, Zuckerberg. And, you know, this is a PC to reclaim a lot of  our, you know, our power and our control and our data. And so I was thinking hard about how to do  this. And I was thinking about a PC that I could build that, that I could, that would be easy for  you to build. So this, these selections is meant to be cost effective and it's meant to have certain  capabilities. So let's get right into it. The beginning of a PC is a motherboard, right? The  motherboard is the thing that defines what you can do with the PC, what you can plug in, what kinds of  CPUs, what kind of RAM. So these are five different standard motherboard sizes.  And so that's one of the first things that you choose is what kind of PC are you going to build?  Here, there's lots of different, these are called PCIe, which I forget what it stands for.  But basically, you can plug in extension, you know, graphics cards, Wi-Fi modules, I don't know, sound cards, streaming cards.  You can plug all sorts of stuff in here.  This is where the RAM goes.  Right here is where the CPU goes.  This is where you plug in monitors and USB.  and this looks like power connectors. Anyway, the point is when you get down to the smaller ones,  there's, you just can't do as much, right? That you, maybe it's got soldered on RAM,  so it's not replaceable. So when I thought about the board, I thought, oh, well, I think I want to  get a micro ATX because that's, you know, it's small enough. It's cheap enough. There's lots of  them. However, when I was thinking about it harder, I identified a particular board that is  I think I was identified a particular board that has some of this already baked in.  And that is something from Intel.  It's called the N100M.  Now, there's two different versions of this.  One of these has a power jack, which makes it harder to power big GPUs.  And I wanted to put one big GPU on this thing.  So I chose the one without a power jack so I can have a separate power supply.  and right here is the CPU well it's the it's the heat sink on top of the CPU so  this is not like a super fast CPU but for the type of thing that I think we  need to do we don't need an amazing CPU and also it's a total pain to put a CPU  onto a motherboard and you can mess it up and then it's a total pain to put the  you know the the thermal solution on so instead what we have here is where a lot  the work is already done for us. And let's see. Okay. This has one expansion slot for a GPU.  This is a mini PCIe. We're not going to use this. I mean, I'm not going to use that. Here's the power  connection. And this only has one slot for RAM. These are the two connections for the hard drive.  well for SATA drives and then this right here is a place where you can put what's called a  SSD it's a solid straight drive there's nothing spinning but the whole hard drive is just a little  chip that goes right there these hard drive connections they're they're just for cables  that you connect to the hard drive in some other place so $124 is not a bad deal for the motherboard  and the CPU and the CPU cooler. So I think that's a great option for what we're trying to do,  which is to build a sort of home server, a home appliance that we can connect to with our mobile  phones so that we're not giving all of our information to Apple and Google and Facebook and,  you know, Elon Musk and Microsoft and yada, yada, yada. Okay. This is a case and you need a case.  And this particular case is great because it's cheap.  I mean, I may be cursing it when I actually get it and try and use it, but I think it's probably going to be fine.  It comes with a fan installed. That's nice.  Here you can put two fans on the top. You can put two fans on the side.  You can put a fan here. The power supply unit goes here.  The hard drives go down here and the motherboard goes right there.  And so this shows that this is for micro ATX.  Remember, MicroATX is right here.  If I can get that up.  Goodness gracious.  Excuse me.  There we go.  MicroATX, this case is really designed just for MicroATX.  So if you're going to choose a different case, make sure that it's the right size for your motherboard.  A lot of motherboards can support multiple cases.  For example, this one says it also will work with ITX, which was not even in that picture, but that's another size.  So it's a good case for us because it's affordable and it's going to allow us to do the rest of what we want.  Now, OpenAI and Anthropic and Grok and, you know, Meta now have these chatbots.  And the chatbots, they take our information and they monetize it and we're the product.  And that's why we got all these free chatbots is because they're trying to get us to tell  them stuff and get dependent.  But we don't want to be dependent.  So I did a bunch of surveys of GPUs that have 16 gigabytes of RAM.  And if you have a bigger, if you have more RAM, you can have smarter models.  So there's lots of GPUs with less than 16 gigabytes.  But let's just, let's just go for the gold here.  some of these are marketed for consumers such as this one here some of them are marketed for  you know professional workstations professional laptops engineering laptops some of them are  marketed for data centers where they go in these big data centers where all of our data gets  harvested and we turn into products and then some of them are designed for laptops but so what I did  was I took all of these and I gave it to ChatshippieT and I said, this is what I said.  I said, find me a 16 gigabyte card for less than 150. And boy, did it deliver. Here we go.  This is, this is incredible. 90 bucks. Okay. But a little more information on this survey.  Here, you can go to this website, you can copy it, you can keep it. And for example,  if we look at NVIDIA data center cards, there's a bunch of them. And, you know, nobody has time  to go through and search for every one of these. And so I just asked the AI to do it and thought  about it for 13 minutes and did a bunch of web searches, as you can see, and came back and said,  here's one. It also found another one, which was interesting, but I ended up not going with.  okay um so one of the issues with these data center gpus you see here's a couple um consumer  ones let's see if you can see this you see you see how it's got these fans on it right so the fans  uh keep it cool because when it's chugging away you know here's another one with some fans on it  When it's chugging away, it gets hot.  And if it gets too hot, it slows down.  And then it doesn't do what you want.  So that's a compromise with these data center GPUs.  But remember, our case has fans.  And so I was thinking, well, maybe that'll be enough.  And maybe it'll slow down.  And maybe that's OK.  but then I found that they make  they make these fans  to use data center GPUs at home and you can plug these fans  right into the motherboard because another thing that the motherboard has are fan  headers let's see USB  USB  yeah right there fan right so you can plug your fan right into that  and you know it probably has more than one so for 22 bucks that seems like great value  now we're going to use our fancy data center GPU with a fan and it's going to stay cool  okay what else do we need well so this home appliance it needs to have our data on it  Because right now our data is with Mark Zuckerberg and with Satya Nadella and with Sundar Pichai and with Elon Musk and, you know, Sam Altman and all these people have our data.  So we need a computer that has its data, that has our data on it.  So here's a couple of hard drives.  And I went ahead and put two in because there's a neat thing you can do when you have two hard drives or if one of them fails, it's always copying to the other.  I got these on eBay.  You may want to get more than one terabyte.  I mean, it depends.  Are you going to put a bunch of videos on this or not?  You know, is it just going to be calendars and to-do and, you know, occasional photo?  But the point is, you can just get a hard drive on eBay for cheap.  Now, these hard drives are great for user data, but the operating system needs to live somewhere.  So this is that NVMe drive.  and this one's cheap right that's why i picked it 120 gigabytes it's not a lot but the operating  system is going to live there so every time that it's looking for instructions on how to run a  program or the business logic you want it to be on a fast drive and just to remind you the this is  called an nvme solid straight drive nvme stands for non-volatile memory express um and you can  come in various lengths. Right now, my cursor is hovering over where that goes. So we are just  about done. Oh, one last thing is RAM. Now, as I'm recording this in 2026, RAM is crazy expensive  because all the data centers want the RAM, but we want the RAM. And so we have to get old RAM.  that's okay um i'm like 99 sure this is going to work it's ddr4 when you buy ram make sure it's  compatible with the board um so this is ddr4 ram and our board needs ddr4 ram i'll have more  information about exactly what the requirements are but of course when you're mixing and matching  components you know if you buy exactly what i bought then it should work but uh anyway so ram  and then finally we need a power supply what's so cool about having this juicy big gpu um you know  it takes power and you need to power it and uh this is so i'm getting this used this is what's  called modular some power supplies have just this big rat's nest and a bunch of spaghetti cables  coming out of it and you know that might work or it might not if the cables don't have the right  end connections and then you need adapters but what's great about a modular power supply like  this is that we're going to be able to plug one of these directly into the GPU and I'll show you  I mean when we build it we'll see but uh the GPU is  and a different window, which is here.  Okay.  Show us the back of the GPU, please.  Let's go ahead and look up a P100.  hopefully they'll have a picture of the back.  Let's see.  Huh.  They don't like to show you the back.  Does anyone else think it's weird that I can't find the back of this GPU?  Ah, there we go.  Okay, right there.  You see that connection there?  That needs to plug in to our power supply.  And so there's a cable that comes with this that can help us do that.  That's why I like modular power supplies. This particular power supply supports 750 watts,  which is a lot. And we're not going to need that. We're probably only going to need like 400.  But don't worry, it won't use 750 watts if it doesn't need it because these things, you know,  go up and down. And also, if you get an oversized power supply, then it's quieter because it doesn't  have to cool itself as much because it's sized to do more. So I feel like this power supply is a  great deal. Who knows what's going to be on eBay when you look around, but I endorse modular power  supplies. Great. Okay. So let's go ahead and look at the damage for what this costs. $431.  That's just not that bad. We've got the fan for 22 bucks. Now look out. Some of the times,  if you if you get a data center card you need to have a shroud or you know a duct thing that  is specific for your gpu and your fan so i chose one where the duct and the fan come together and  they it's specifically marketed it looks like the m40p 40p 100 v100 are all mechanically compatible  um hard drives if you do get two of them to to get the the benefit the redundancy be sure that  they're the exact same if you get them and they're different sizes or different you know part numbers  then they may not work together because it's the software that has to like have it automatically  match um with this one uh there are cheaper solid state drives but you have to make sure  that with this particular board,  this does not support every possible site.  You see 1, 2, 3.  And if you look down here,  it says  storage M2.  It supports 2242, 2260, and 2280.  So that's 80mm, 60mm, and 42mm, and 22 wide.  So they make a 2230,  and there's lots of great cheap SSDs  that are 2240.  30 millimeters long, but it won't work with this board. It's too bad. The RAM,  that's a whole nother topic. I'm getting 16 gigs because it seems like a decent amount.  54 bucks, I think that's a pretty good deal. RAM prices are very volatile. The case,  you know, we'll see how it works. Sometimes you get what you pay for. Sometimes you get more.  Um, yeah, I've talked about the motherboard and, uh, 90 bucks for 16 gigs.  That is a crazy deal.  That is a crazy deal.  And that's why it's so great when you have a list of like hundreds of GPUs and you say  to the AI, go get me a cheap one.  I feel great about that.  Okay.  Thank you so much.  Um, uh, you may buy this, you may buy it from me, you may buy other parts, but  the point is we have the power we have the ability we have it is within our control to reclaim  our lives and our privacy and our sovereignty and why the heck not and and we've got to we've got to  because it's just it's more and more important every day um and hopefully what you see from me  is something that you can follow and reclaim your life.  And of course, once I build this,  I'm gonna load some specific software on that's free  and the software is going to make it really easy.  You don't have to write software.  This is what's called open source hardware,  meaning like everything,  you're seeing everything I'm doing here.  And with the software,  you're gonna be able to inspect everything.  And so anyone can know exactly what's happening.  And that's different from software as a service,  SaaS. That's different from the subscriptions that we're all using right now. That's different from  the vendor lock-in and platform lock-in that is what drives our economy, unfortunately,  and probably my retirement account. But I'd rather have a little more dignity and freedom than  having my mutual fund have more trillion-dollar tech companies with market cap. So anyway, let's  Let's rebel.  Thank you so much.  I'm John Benac from Tech of Our Own.
+      </pre>
+    </details>
+  </main>
+</body>
+</html>
