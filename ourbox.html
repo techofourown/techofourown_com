@@ -149,13 +149,13 @@
         header p {
             font-size: 1.15rem;
             color: var(--muted);
-            max-width: 700px;
+            max-width: 760px;
         }
 
         .hero-bullets {
             display: grid;
             gap: 12px;
-            max-width: 720px;
+            max-width: 780px;
         }
 
         .hero-bullets strong {
@@ -228,31 +228,6 @@
             margin-bottom: 10px;
         }
 
-        .steps {
-            counter-reset: steps;
-        }
-
-        .step {
-            padding: 24px;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
-        }
-
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #e0ecff;
-            color: var(--accent-dark);
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
         .cta-block {
             margin-top: 24px;
             background: #eff6ff;
@@ -320,6 +295,7 @@
                 <a href="#why">Why</a>
                 <a href="#principles">Principles</a>
                 <a href="#hardware">Hardware</a>
+                <a href="#family">Family</a>
                 <a href="#build">Build</a>
                 <a href="#faq">FAQ</a>
             </div>
@@ -334,19 +310,21 @@
             <h1>A local-first home server you can own.</h1>
             <p>
                 OurBox is a personal server appliance for running self-hosted services at home—without
-                subscriptions, lock-in, or data extraction.
+                subscriptions, lock-in, or data extraction. It’s designed for people who want modern convenience
+                without handing the keys to someone else.
             </p>
 
             <div class="hero-bullets">
-                <p><strong>Local-first by design</strong> — all functionality lives on your hardware.</p>
-                <p><strong>Runs containerized services</strong> — you choose what to run and how.</p>
-                <p><strong>No subscriptions. Ever.</strong> The product must remain useful on its own.</p>
-                <p><strong>Open source, always</strong> — auditable, forkable, and built for real exit.</p>
+                <p><strong>Local-first by design</strong> — core functionality lives on your hardware.</p>
+                <p><strong>Whole-stack freedom</strong> — open hardware + open software + public documentation.</p>
+                <p><strong>No subscriptions. Ever.</strong> The product stays useful on its own.</p>
+                <p><strong>Exit is real</strong> — inspect, repair, fork, migrate, and keep going without us.</p>
             </div>
 
             <div class="hero-actions">
-                <a class="button" href="https://github.com/techofourown/pf-ourbox">Read the OurBox docs</a>
-                <a class="button secondary" href="index.html#mission">Why we’re building this</a>
+                <a class="button" href="woodbox_demo_parts_procurement.html">Watch the walkthrough</a>
+                <a class="button secondary" href="#family">Meet the hardware family</a>
+                <a class="text-link" href="index.html#mission">Why we’re building this →</a>
             </div>
 
             <p class="trust-strip">No hype funnel. The repos are the source of truth.</p>
@@ -361,8 +339,8 @@
             </p>
             <p>
                 <strong>OurBox is a single, physical place where your digital life can live—on your terms.</strong>
-                It’s a personal home server appliance designed for families, privacy-minded rebels, hobbyists, and
-                anyone who wants modern convenience <em>without</em> handing the keys to someone else.
+                Host the tools you depend on (files, photos, calendars, notes, messaging, automation) without
+                building a permanent dependency on an extractive company.
             </p>
         </section>
 
@@ -371,11 +349,11 @@
             <div class="grid three">
                 <div class="card">
                     <h3>No subscriptions. Ever.</h3>
-                    <p>We do not charge recurring consumer fees for any functionality.</p>
+                    <p>We do not charge recurring consumer fees for functionality, access, or updates.</p>
                 </div>
                 <div class="card">
                     <h3>Local-first forever</h3>
-                    <p>Product behavior must work locally without dependence on our servers.</p>
+                    <p>Core product behavior must work locally without dependence on our servers.</p>
                 </div>
                 <div class="card">
                     <h3>User data is not a product</h3>
@@ -383,7 +361,7 @@
                 </div>
                 <div class="card">
                     <h3>Open source, always</h3>
-                    <p>All software is published under an open-source license with auditable processes.</p>
+                    <p>Software is published under an open-source license with auditable processes.</p>
                 </div>
                 <div class="card">
                     <h3>Exit must be real</h3>
@@ -399,22 +377,66 @@
         <section id="hardware">
             <div class="grid two">
                 <div>
-                    <h2>Purpose-built hardware</h2>
+                    <h2>Purpose-built hardware, without fragile dependence</h2>
                     <p>
-                        OurBox is a physical appliance designed to live on a shelf and run continuously.
-                        Specific hardware configurations may evolve over time, but the product promise stays constant:
-                        a durable, repairable home base for self-hosted services.
+                        OurBox is a physical appliance designed to live on a shelf and run continuously. We publish
+                        reference designs you can build yourself, and we aim to provide supported paths for people who
+                        want help.
+                    </p>
+                    <p>
+                        The promise is stable even when parts change: keep your services local, keep your data yours,
+                        and keep the whole system understandable and repairable.
                     </p>
                 </div>
                 <div class="card">
                     <h3>Canonical specs live in the repos</h3>
                     <p>
-                        We keep the real hardware and system documentation in the OurBox product family repository.
+                        We keep the current hardware and system documentation in the OurBox product family repository.
+                        When something changes, the repos change first.
                     </p>
                     <div class="hero-actions">
                         <a class="button" href="https://github.com/techofourown/pf-ourbox">OurBox docs on GitHub</a>
-                        <a class="button secondary" href="https://github.com/techofourown/org-techofourown">Org docs on GitHub</a>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="family">
+            <h2>A family of hardware, one promise</h2>
+            <p>
+                OurBox isn’t a single frozen configuration. It’s a family of models designed to meet different needs,
+                from small always-on boxes to full x86 builds. Internals evolve over time; the product contract stays
+                the same: local-first, durable, and user-owned.
+            </p>
+
+            <div class="grid three" style="margin-top: 18px;">
+                <div class="card">
+                    <h3>Matchbox</h3>
+                    <p>A compact, Pi-class home server for quiet, always-on use.</p>
+                </div>
+                <div class="card">
+                    <h3>Cinderbox</h3>
+                    <p>A compute-module appliance path when “everything inside the case” matters most.</p>
+                </div>
+                <div class="card">
+                    <h3>Tinderbox</h3>
+                    <p>An edge-AI oriented model for local inference and sensor/USB-heavy workloads.</p>
+                </div>
+                <div class="card">
+                    <h3>Woodbox</h3>
+                    <p>A desktop-class x86 build for “wide services” and upgrade-friendly expansion.</p>
+                </div>
+            </div>
+
+            <div class="cta-block">
+                <h3>Build it yourself—or get as much help as you want</h3>
+                <p>
+                    We want anyone to be able to liberate themselves with open hardware and open software. Use our
+                    designs as-is, fork them, remix them, or just use them as a starting point.
+                </p>
+                <div class="hero-actions">
+                    <a class="button" href="woodbox_demo_parts_procurement.html">Watch a real build walkthrough</a>
+                    <a class="button secondary" href="https://github.com/techofourown/pf-ourbox">Browse the docs</a>
                 </div>
             </div>
         </section>
@@ -425,26 +447,22 @@
                 <div class="card">
                     <h3>Every design is published</h3>
                     <p>
-                        All OurBox hardware designs are released under the CERN Open Hardware Licence
-                        (CERN-OHL-S-2.0). That means anyone can inspect the designs, build their own unit,
-                        repair it, or fork the project entirely.
+                        OurBox hardware designs are released under the CERN Open Hardware Licence (CERN-OHL-S-2.0).
+                        That means anyone can inspect the designs, build their own unit, repair it, or fork the project.
                     </p>
                     <p>
-                        Multiple configurations exist—from compact Raspberry Pi-based setups to full x86
-                        desktop builds with local AI capability. The published designs are a starting point,
-                        not a constraint.
+                        We build the full stack—hardware, software, and documentation—so people can choose their own
+                        level of independence: DIY, community support, or a supported path.
                     </p>
                 </div>
                 <div class="card">
                     <h3>See it done: a Woodbox Forge for ~$450</h3>
                     <p>
-                        One person, off-the-shelf parts, no special tools. This walkthrough shows an
-                        OurBox Woodbox Forge configuration being sourced and assembled as a budget
-                        AI-capable home server—one of many possible builds from the open designs.
+                        One person, off-the-shelf parts, no special tools. This walkthrough shows a budget
+                        AI-capable home server being sourced as a practical starting point.
                     </p>
                     <div class="hero-actions">
                         <a class="button" href="woodbox_demo_parts_procurement.html">Watch the walkthrough</a>
-                        <a class="button secondary" href="https://github.com/techofourown/pf-ourbox">Hardware repos on GitHub</a>
                     </div>
                 </div>
             </div>
@@ -465,15 +483,14 @@
 
             <div class="faq-item">
                 <h3>Is it open source?</h3>
-                <p>Yes—every bit of the software is open source. The repos are the source of truth.</p>
+                <p>Yes—hardware and software. The repos are the source of truth.</p>
             </div>
 
             <div class="faq-item">
                 <h3>Where do I learn more?</h3>
                 <p>
-                    Start with the OurBox docs and the organization governance docs:
-                    <a href="https://github.com/techofourown/pf-ourbox">pf-ourbox</a> and
-                    <a href="https://github.com/techofourown/org-techofourown">org-techofourown</a>.
+                    Start with the OurBox docs:
+                    <a href="https://github.com/techofourown/pf-ourbox">pf-ourbox</a>.
                 </p>
             </div>
         </section>
@@ -483,8 +500,8 @@
             <p>Personal security and privacy—built for real households.</p>
             <div class="footer-links">
                 <a href="index.html">Tech of Our Own</a>
-                <a href="https://github.com/techofourown/pf-ourbox">OurBox on GitHub</a>
-                <a href="https://github.com/techofourown/org-techofourown">Governance on GitHub</a>
+                <a href="woodbox_demo_parts_procurement.html">Watch the walkthrough</a>
+                <a href="https://github.com/techofourown/pf-ourbox">OurBox docs on GitHub</a>
             </div>
             <p><strong>OurBox is designed to put you back in control of your home’s digital life.</strong></p>
         </footer>
