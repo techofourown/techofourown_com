@@ -6,12 +6,15 @@ This repository uses a lightweight documentation structure focused on RFCs and A
 
 ```
 docs/
-├── rfcs/          # Pre-decisional exploration and proposals
-└── decisions/     # Architecture Decision Records (ADRs)
+├── administration/  # Operational guides and procedures
+├── rfcs/            # Pre-decisional exploration and proposals
+└── decisions/       # Architecture Decision Records (ADRs)
 ```
 
 ## When to use what
 
+- **Administration (`administration/`)** — operational guides for recurring tasks (e.g., uploading
+  media, configuring services). Step-by-step, practical, focused on what works.
 - **RFCs (`rfcs/`)** — explore ideas or proposals before deciding; capture options, trade-offs, and
   open questions.
 - **ADRs (`decisions/`)** — record a decision that was made, with context, rationale, consequences,

@@ -21,7 +21,11 @@ This is a simple static website with no frameworks, no bundlers, and no JavaScri
 - Mobile-first responsive design with media queries
 
 ### Documentation System
-The `docs/` directory uses a dual-structure approach for decision-making:
+The `docs/` directory organizes documentation by purpose:
+
+**Administration (`docs/administration/`)** - Operational guides
+- Step-by-step procedures for recurring tasks (e.g., uploading media to R2)
+- Practical and focused on what works
 
 **RFCs (`docs/rfcs/`)** - Pre-decisional exploration
 - Draft proposals, trade-off analysis, open questions
