@@ -1,7 +1,5 @@
 # ADR-0001: Use Cloudflare R2 and Cloudflare CDN for first-party video delivery
 
-## Status
-Accepted
 
 ## Date
 2026-02-04
