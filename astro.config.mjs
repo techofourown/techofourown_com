@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://techofourown.com",
   output: "static",
-  trailingSlash: "ignore",
+  trailingSlash: "always",
   build: {
     format: "directory",
   },

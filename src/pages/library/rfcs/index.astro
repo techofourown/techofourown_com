@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import CollectionCard from "../../../components/CollectionCard.astro";
+import SiteFooter from "../../../components/SiteFooter.astro";
+import SiteNav from "../../../components/SiteNav.astro";
+import { site } from "../../../data/site";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const hasEntries = Object.keys(import.meta.glob("/src/content/rfcs/**/*.{md,mdx}")).length > 0;
+const entries = hasEntries
+  ? (await getCollection("rfcs", ({ data }) => !data.draft)).sort((a, b) => {
+      const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+      const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+      if (orderA !== orderB) return orderA - orderB;
+      return (b.data.publishedAt?.getTime() ?? 0) - (a.data.publishedAt?.getTime() ?? 0);
+    })
+  : [];
+---
+
+<BaseLayout title="Library RFCs | Tech of Our Own" description="Public RFCs and design notes that are ready for outside readers.">
+  <main class="site-page">
+    <SiteNav />
+    <div class="site-main">
+      <section class="section-block">
+        <p class="site-hero__eyebrow">Library / RFCs</p>
+        <h1 class="section-block__title">Public RFCs.</h1>
+        <p class="section-block__lede">
+          RFCs only land here when they are genuinely ready for public review.
+        </p>
+      </section>
+
+      {
+        entries.length > 0 ? (
+          <section class="collection-grid">
+            {entries.map((entry) => (
+              <CollectionCard
+                href={`/library/rfcs/${entry.id}/`}
+                title={entry.data.title}
+                description={entry.data.summary ?? entry.data.description}
+                meta={[entry.data.status]}
+              />
+            ))}
+          </section>
+        ) : (
+          <div class="empty-state">No public RFCs yet.</div>
+        )
+      }
+    </div>
+    <SiteFooter
+      description="RFCs remain intentionally empty until there is real public material to publish."
+      links={[
+        { href: "/library/", label: "Back to Library" },
+        { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>

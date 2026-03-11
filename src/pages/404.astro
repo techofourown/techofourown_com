@@ -1,65 +1,36 @@
 ---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteNav from "../components/SiteNav.astro";
+import { site } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Page not found | Tech of Our Own">
-  <main class="not-found-page">
-    <div class="not-found-card">
-      <h1>We couldn’t find that page.</h1>
-      <p>
-        The link may be outdated or the page might have moved. Use the shortcuts below to get back
-        on track.
-      </p>
-      <div class="not-found-actions">
-        <a class="button" href="/">Home</a>
-        <a class="button secondary" href="/ourbox.html">OurBox</a>
-        <a class="button secondary" href="https://github.com/techofourown/">Public GitHub</a>
+  <main class="site-page">
+    <SiteNav />
+
+    <section class="not-found-page">
+      <div class="not-found-card">
+        <h1 class="not-found-card__title">We couldn’t find that page.</h1>
+        <p class="not-found-card__lede">
+          The link may be outdated or the page might have moved. Use the shortcuts below to get back
+          on track.
+        </p>
+        <div class="not-found-card__actions">
+          <a class="button" href="/">Home</a>
+          <a class="button button--secondary" href="/ourbox/">OurBox</a>
+          <a class="button button--secondary" href={site.githubOrgUrl}>Public GitHub</a>
+        </div>
+        <p class="not-found-card__note">No trackers. No ads. Just static HTML.</p>
       </div>
-      <small>No trackers. No ads. Just static HTML.</small>
-    </div>
+    </section>
+
+    <SiteFooter
+      description="Tech of Our Own keeps the public site static, direct, and first-party."
+      links={[
+        { href: "/ourbox/", label: "Explore OurBox ->" },
+        { href: site.githubOrgUrl, label: "See the public GitHub ->", external: true },
+      ]}
+    />
   </main>
 </BaseLayout>
-
-<style>
-  .not-found-page {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 16px;
-    background: radial-gradient(circle at top left, #e0ebff, #ffffff 60%);
-  }
-
-  .not-found-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.14);
-    padding: 32px;
-    max-width: 720px;
-    width: 100%;
-    display: grid;
-    gap: 16px;
-    text-align: center;
-  }
-
-  .not-found-card h1 {
-    font-size: clamp(2.1rem, 4vw, 2.6rem);
-  }
-
-  .not-found-card p {
-    font-size: 1.05rem;
-  }
-
-  .not-found-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 8px;
-  }
-
-  .not-found-card small {
-    color: var(--muted);
-  }
-</style>

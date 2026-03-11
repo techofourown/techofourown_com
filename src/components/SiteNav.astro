@@ -1,0 +1,52 @@
+---
+import { navItems } from "../data/nav";
+import { site } from "../data/site";
+
+const currentPath = Astro.url.pathname;
+const linkItems = navItems.filter((item) => !item.action);
+const actionItems = navItems.filter((item) => item.action);
+
+const isActive = (href: string) => {
+  if (href === "/") {
+    return currentPath === "/";
+  }
+
+  const normalized = href.startsWith("/") ? href : `/${href}`;
+  return currentPath === normalized || currentPath.startsWith(`${normalized}/`);
+};
+---
+
+<nav class="site-nav" aria-label="Primary">
+  <a class="site-nav__brand" href="/">{site.name}</a>
+
+  <div class="site-nav__links">
+    {
+      linkItems.map((item) => (
+        <a
+          class:list={{
+            "site-nav__link": true,
+            "site-nav__link--active": !item.external && isActive(item.href),
+          }}
+          href={item.href}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="site-nav__actions">
+    {
+      actionItems.map((item) => (
+        <a
+          class="button button--secondary"
+          href={item.href}
+          target={item.external ? "_blank" : undefined}
+          rel={item.external ? "noreferrer" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </div>
+</nav>

@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from "astro:content";
+import CollectionCard from "../../components/CollectionCard.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import { site } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const essays = (await getCollection("philosophy", ({ data }) => !data.draft)).sort((a, b) => {
+  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+  if (orderA !== orderB) return orderA - orderB;
+  return (b.data.publishedAt?.getTime() ?? 0) - (a.data.publishedAt?.getTime() ?? 0);
+});
+
+const renderedEssays = await Promise.all(
+  essays.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+---
+
+<BaseLayout title="Why | Tech of Our Own" description="Why Tech of Our Own is building technology people can truly own.">
+  <main class="site-page">
+    <SiteNav />
+    <div class="site-main">
+      <section class="section-block">
+        <p class="site-hero__eyebrow">Why</p>
+        <h1 class="section-block__title">Why ownership, local-first design, and incentives matter.</h1>
+        <p class="section-block__lede">
+          This section keeps the long-term argument visible and linkable. It is where the product,
+          the institution, and the incentive structure are explained in plain terms.
+        </p>
+      </section>
+
+      {
+        renderedEssays.length > 0 ? (
+          <>
+            <section class="collection-grid">
+              {renderedEssays.map(({ entry }) => (
+                <CollectionCard
+                  href={`/why/#essay-${entry.id}`}
+                  title={entry.data.title}
+                  description={entry.data.summary ?? entry.data.description}
+                />
+              ))}
+            </section>
+
+            {renderedEssays.map(({ entry, Content }, index) => (
+              <section class="section-block" id={`essay-${entry.id}`}>
+                <article class="content-layout">
+                  <header class="content-layout__header">
+                    <p class="site-hero__eyebrow">{index === 0 ? "Featured Essay" : "Essay"}</p>
+                    <h2 class="content-layout__title">{entry.data.title}</h2>
+                    <p class="content-layout__description">{entry.data.description}</p>
+                  </header>
+                  <div class="prose">
+                    <Content />
+                  </div>
+                </article>
+              </section>
+            ))}
+          </>
+        ) : (
+          <div class="empty-state">No public philosophy essays yet.</div>
+        )
+      }
+    </div>
+    <SiteFooter
+      description="The public philosophy section keeps the long-term argument visible, linkable, and durable."
+      links={[
+        { href: "/ourbox/", label: "Explore OurBox" },
+        { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>

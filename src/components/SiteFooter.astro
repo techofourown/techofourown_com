@@ -1,0 +1,29 @@
+---
+interface FooterLink {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+
+interface Props {
+  description: string;
+  links?: FooterLink[];
+}
+
+const { description, links = [] } = Astro.props;
+---
+
+<footer class="site-footer">
+  <p>{description}</p>
+  {
+    links.length > 0 && (
+      <div class="site-footer__links">
+        {links.map((link) => (
+          <a href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</footer>

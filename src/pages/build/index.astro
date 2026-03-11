@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import CollectionCard from "../../components/CollectionCard.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import { site } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const hasEntries = Object.keys(import.meta.glob("/src/content/build/**/*.{md,mdx}")).length > 0;
+const entries = hasEntries
+  ? (await getCollection("build", ({ data }) => !data.draft)).sort((a, b) => {
+      const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+      const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+      if (orderA !== orderB) return orderA - orderB;
+      return (b.data.publishedAt?.getTime() ?? 0) - (a.data.publishedAt?.getTime() ?? 0);
+    })
+  : [];
+---
+
+<BaseLayout title="Build | Tech of Our Own" description="Build guides and hardware walkthroughs for first-party personal infrastructure.">
+  <main class="site-page">
+    <SiteNav />
+    <div class="site-main">
+      <section class="section-block">
+        <p class="site-hero__eyebrow">Build</p>
+        <h1 class="section-block__title">Build guides for hardware you can inspect and keep.</h1>
+        <p class="section-block__lede">
+          This section collects build notes, procurement walkthroughs, and other hands-on paths into
+          the OurBox ecosystem.
+        </p>
+      </section>
+
+      {
+        entries.length > 0 ? (
+          <section class="collection-grid">
+            {entries.map((entry) => (
+              <CollectionCard
+                href={`/build/${entry.id}/`}
+                title={entry.data.title}
+                description={entry.data.summary ?? entry.data.description}
+                meta={[entry.data.difficulty, entry.data.estimatedTime ?? ""].filter(Boolean)}
+              />
+            ))}
+          </section>
+        ) : (
+          <div class="empty-state">No public build entries yet.</div>
+        )
+      }
+    </div>
+    <SiteFooter
+      description="Build guides keep the hardware path visible, reproducible, and local-first."
+      links={[
+        { href: "/ourbox/", label: "Explore OurBox" },
+        { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>

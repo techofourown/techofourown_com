@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  videoUrl: string;
+  runtime?: string;
+  difficulty?: string;
+}
+
+const { title, videoUrl, runtime, difficulty } = Astro.props;
+const metadata = [
+  ...(runtime ? [{ label: "Runtime", value: runtime }] : []),
+  ...(difficulty ? [{ label: "Difficulty", value: difficulty }] : []),
+];
+---
+
+<section class="video-player">
+  {metadata.length > 0 && (
+    <dl class="content-layout__meta">
+      {metadata.map((item) => (
+        <div class="content-layout__meta-item">
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+
+  <div class="video-player__frame">
+    <video controls preload="metadata" playsinline>
+      <source src={videoUrl} type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
+
+  <p class="video-player__link-row">
+    Direct MP4:
+    <a href={videoUrl}>{title}</a>
+  </p>
+</section>

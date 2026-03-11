@@ -1,275 +1,326 @@
 ---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteNav from "../components/SiteNav.astro";
+import { site } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout
-  title="Tech of Our Own"
-  description="Technology people can truly own—private, durable, and local-first."
->
-  <main class="page">
-    <header>
-      <span class="tagline">Tech of Our Own</span>
-      <h1>Technology people can truly own—private, durable, and local-first.</h1>
-      <p>
-        Tech of Our Own is building non-extractive consumer technology that gives people control of
-        their devices and data. We start with OurBox, a local-first personal server you can own
-        outright.
-      </p>
-      <div class="hero-actions">
-        <a class="button" href="#mission">Mission &amp; Vision</a>
-        <a class="button secondary" href="#governance">Governance Model</a>
-        <a class="button secondary" href="ourbox.html">Explore OurBox</a>
-        <a class="button secondary" href="https://github.com/techofourown/">View our public GitHub</a>
-      </div>
-    </header>
+<BaseLayout title="Tech of Our Own" description={site.defaultDescription}>
+  <main class="site-page">
+    <SiteNav />
 
-    <section id="mission">
-      <div class="grid two">
-        <div class="card">
-          <h2>Vision</h2>
-          <p>
-            A world where people own their technology—their devices and their data—
-            without
-            surveillance, lock-in, or dependency on extractive companies.
-          </p>
-          <p>
-            We want consumer technology to feel like tools you can trust: local-first, repairable,
-            understandable, and built to serve human life for decades.
-          </p>
+    <div class="site-main">
+      <section class="site-hero">
+        <span class="site-hero__eyebrow">Tech of Our Own</span>
+        <h1 class="site-hero__title">Technology people can truly own—private, durable, and local-first.</h1>
+        <p class="site-hero__lede">
+          Tech of Our Own is building non-extractive consumer technology that gives people control of
+          their devices and data. We start with OurBox, a local-first personal server you can own
+          outright.
+        </p>
+        <div class="site-actions">
+          <a class="button" href="#mission">Mission &amp; Vision</a>
+          <a class="button button--secondary" href="#governance">Governance Model</a>
+          <a class="button button--secondary" href="/ourbox/">Explore OurBox</a>
+          <a class="button button--secondary" href={site.githubOrgUrl}>View our public GitHub</a>
         </div>
-        <div class="card">
-          <h2>Mission</h2>
-          <p>
-            Tech of Our Own exists to build non-extractive consumer technology that makes people
-            more capable, more private, and more free.
-          </p>
-          <ul class="list">
-            <li>
-              Ship local-first products that keep personal data and computation under the user’s
-              control.
-            </li>
-            <li>
-              Build in public with open-source, always-on practices, auditable security, and shared
-              knowledge.
-            </li>
-            <li>
-              Design for long life through repairability, upgrade paths, and long-term support.
-            </li>
-            <li>
-              Refuse dependency business models: no subscriptions, no hostage mechanics, no data
-              sales.
-            </li>
-            <li>Structure governance so users and workers are represented and benefit.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="who-we-are">
-      <h2>Who we are</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Stakeholder-led company</h3>
-          <p>
-            We’re mission-locked and built for two constitutional memberships:
-            <strong>users</strong> and <strong>workers</strong>. They’re represented in governance
-            and share in the upside—so the company can’t quietly drift into extraction.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Governed for longevity</h3>
-          <p>
-            Our constitution and board operations documents define non-negotiables, transparent
-            governance, and long-term stewardship so the company cannot drift into extraction or
-            lock-in.
-          </p>
-        </div>
-      </div>
-    </section>
+      <section class="section-block" id="mission">
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h2 class="section-block__title">Vision</h2>
+            <div class="card__body">
+              <p>
+                A world where people own their technology—their devices and their data—without
+                surveillance, lock-in, or dependency on extractive companies.
+              </p>
+              <p>
+                We want consumer technology to feel like tools you can trust: local-first,
+                repairable, understandable, and built to serve human life for decades.
+              </p>
+            </div>
+          </article>
 
-    <section id="what-we-do">
-      <h2>What we do</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>OurBox, the first flagship</h3>
-          <p>
-            OurBox is our starting point: a local-first personal server that runs at home, keeps
-            data private, and stays useful without a subscription.
-          </p>
+          <article class="card">
+            <h2 class="section-block__title">Mission</h2>
+            <div class="card__body">
+              <p>
+                Tech of Our Own exists to build non-extractive consumer technology that makes people
+                more capable, more private, and more free.
+              </p>
+              <ul class="bullet-list">
+                <li>
+                  Ship local-first products that keep personal data and computation under the user’s
+                  control.
+                </li>
+                <li>
+                  Build in public with open-source, always-on practices, auditable security, and
+                  shared knowledge.
+                </li>
+                <li>
+                  Design for long life through repairability, upgrade paths, and long-term support.
+                </li>
+                <li>
+                  Refuse dependency business models: no subscriptions, no hostage mechanics, no data
+                  sales.
+                </li>
+                <li>Structure governance so users and workers are represented and benefit.</li>
+              </ul>
+            </div>
+          </article>
         </div>
-        <div class="card">
-          <h3>Future product categories</h3>
-          <p>
-            The mission extends to any future product category where people need technology that
-            respects them—phones, appliances, robotics, and beyond—while keeping ownership and
-            autonomy intact.
-          </p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section>
-      <h2>Non-negotiables</h2>
-      <div class="grid three">
-        <div class="card">
-          <h3>No subscriptions. Ever.</h3>
-          <p>
-            We will not charge recurring fees for consumer features, access, updates, or any
-            functionality.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Local-first forever</h3>
-          <p>Product functionality must work locally without reliance on TOOO-operated services.</p>
-        </div>
-        <div class="card">
-          <h3>No hostage mechanics</h3>
-          <p>
-            Users are never forced to pay ongoing fees to access their devices, data, or safety
-            features.
-          </p>
-        </div>
-        <div class="card">
-          <h3>User data is not a product</h3>
-          <p>No sale of user data, no behavioral advertising, and no hidden telemetry.</p>
-        </div>
-        <div class="card">
-          <h3>Open source, always</h3>
-          <p>All software is open source with auditable security and reproducible processes.</p>
-        </div>
-        <div class="card">
-          <h3>Right to repair</h3>
-          <p>We design for durability, publish repair guidance, and support long-life product paths.</p>
-        </div>
-        <div class="card">
-          <h3>Exit to self-sufficiency</h3>
-          <p>Interoperability and exportability ensure people can operate without us over time.</p>
-        </div>
-      </div>
-    </section>
+      <section class="section-block" id="who-we-are">
+        <h2 class="section-block__title">Who we are</h2>
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h3 class="card__title">Stakeholder-led company</h3>
+            <div class="card__body">
+              <p>
+                We’re mission-locked and built for two constitutional memberships:
+                <strong>users</strong> and <strong>workers</strong>. They’re represented in
+                governance and share in the upside—so the company can’t quietly drift into
+                extraction.
+              </p>
+            </div>
+          </article>
 
-    <section id="governance">
-      <h2>Governed by users and workers, not shareholders</h2>
-      <p>
-        Most tech companies are built to answer upward—to investors, owners, founders, and
-        shareholders. Tech of Our Own is built to answer <em>outward</em>: to the people who use
-        the product and the people who build it.
-      </p>
-      <br />
+          <article class="card">
+            <h3 class="card__title">Governed for longevity</h3>
+            <div class="card__body">
+              <p>
+                Our constitution and board operations documents define non-negotiables, transparent
+                governance, and long-term stewardship so the company cannot drift into extraction or
+                lock-in.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Co-op governance, in practice</h3>
-          <ul class="list">
-            <li>
-              <strong>Users and workers are the owners.</strong> The people who rely on and build
-              the product hold the authority.
-            </li>
-            <li>
-              <strong>Ownership means representation.</strong> Decisions answer to everyday use and
-              day-to-day work, not distant shareholders.
-            </li>
-            <li>
-              <strong>No exit windfalls.</strong> We are not built for liquidity events or sell-outs;
-              stewardship stays with the community.
-            </li>
-            <li>
-              <strong>Value flows back to the community.</strong> Surplus is returned to users and
-              workers instead of being extracted.
-            </li>
-          </ul>
-        </div>
+      <section class="section-block" id="what-we-do">
+        <h2 class="section-block__title">What we do</h2>
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h3 class="card__title">OurBox, the first flagship</h3>
+            <div class="card__body">
+              <p>
+                OurBox is our starting point: a local-first personal server that runs at home, keeps
+                data private, and stays useful without a subscription.
+              </p>
+            </div>
+          </article>
 
-        <div class="card">
-          <h3>Incentives drive everything</h3>
-          <p>
-            Mission and good intention and ethos are almost always overcome by
-            <strong>incentives</strong>. In modern tech, that incentive is almost always
-            <strong>profit</strong>, for the owners and the workers.
-          </p>
+          <article class="card">
+            <h3 class="card__title">Future product categories</h3>
+            <div class="card__body">
+              <p>
+                The mission extends to any future product category where people need technology that
+                respects them—phones, appliances, robotics, and beyond—while keeping ownership and
+                autonomy intact.
+              </p>
+            </div>
+          </article>
         </div>
+      </section>
 
-        <div class="card">
-          <h3>Close the profit feedback loop</h3>
-          <p>
-            By closing the profit feedback loop with users—returning value through dividends—
-            a
-            cooperative can escape the vicious cycle that reliably degrades even the most beloved
-            products and companies over time.
-          </p>
+      <section class="section-block">
+        <h2 class="section-block__title">Non-negotiables</h2>
+        <div class="card-grid card-grid--three">
+          <article class="card">
+            <h3 class="card__title">No subscriptions. Ever.</h3>
+            <div class="card__body">
+              <p>
+                We will not charge recurring fees for consumer features, access, updates, or any
+                functionality.
+              </p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Local-first forever</h3>
+            <div class="card__body">
+              <p>Product functionality must work locally without reliance on TOOO-operated services.</p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">No hostage mechanics</h3>
+            <div class="card__body">
+              <p>
+                Users are never forced to pay ongoing fees to access their devices, data, or safety
+                features.
+              </p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">User data is not a product</h3>
+            <div class="card__body">
+              <p>No sale of user data, no behavioral advertising, and no hidden telemetry.</p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Open source, always</h3>
+            <div class="card__body">
+              <p>All software is open source with auditable security and reproducible processes.</p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Right to repair</h3>
+            <div class="card__body">
+              <p>We design for durability, publish repair guidance, and support long-life product paths.</p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Exit to self-sufficiency</h3>
+            <div class="card__body">
+              <p>Interoperability and exportability ensure people can operate without us over time.</p>
+            </div>
+          </article>
         </div>
+      </section>
 
-        <div class="card">
-          <h3>Remove “exit events”</h3>
-          <p>
-            By removing liquidity “exit events” from worker incentives, or "equity sales" to
-            shareholders, the only ones left to serve are the users.
-          </p>
-        </div>
-      </div>
-    </section>
+      <section class="section-block" id="governance">
+        <h2 class="section-block__title">Governed by users and workers, not shareholders</h2>
+        <p class="section-block__lede">
+          Most tech companies are built to answer upward—to investors, owners, founders, and
+          shareholders. Tech of Our Own is built to answer <em>outward</em>: to the people who use
+          the product and the people who build it.
+        </p>
 
-    <section id="open">
-      <h2>We build in public</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Open organization, always</h3>
-          <p>
-            We keep our organization, documentation, and product work in the open so anyone can
-            inspect decisions, follow progress, or contribute directly.
-          </p>
-          <p>
-            This includes our governance docs, product families, and public roadmaps—because trust
-            means showing the work.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Contribute on GitHub</h3>
-          <p>Explore the full organization to see what we’re working on and where you can help.</p>
-          <div class="hero-actions">
-            <a class="button" href="https://github.com/techofourown/">Tech of Our Own on GitHub</a>
-            <a class="button secondary" href="https://github.com/techofourown/org-techofourown">Organization docs</a>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h3 class="card__title">Co-op governance, in practice</h3>
+            <div class="card__body">
+              <ul class="bullet-list">
+                <li>
+                  <strong>Users and workers are the owners.</strong> The people who rely on and build
+                  the product hold the authority.
+                </li>
+                <li>
+                  <strong>Ownership means representation.</strong> Decisions answer to everyday use and
+                  day-to-day work, not distant shareholders.
+                </li>
+                <li>
+                  <strong>No exit windfalls.</strong> We are not built for liquidity events or
+                  sell-outs; stewardship stays with the community.
+                </li>
+                <li>
+                  <strong>Value flows back to the community.</strong> Surplus is returned to users and
+                  workers instead of being extracted.
+                </li>
+              </ul>
+            </div>
+          </article>
 
-    <section>
-      <h2>Shared surplus &amp; transparency</h2>
-      <div class="grid three">
-        <div class="card">
-          <h3>Surplus returns to the people who make it possible</h3>
-          <p>
-            Each year we publish a Dividend Pool: free cash flow minus required reserves and
-            minimum reinvestment. If it is positive, it is split 50/50 between users and workers—no
-            founder toll.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Plain-language reporting</h3>
-          <p>
-            We publish annual governance reports, reserve status, dividend distributions, and
-            plain-language financial summaries so members can see—clearly—whether we’re upholding
-            the mission.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Pay is capped by a published ratio</h3>
-          <p>
-            Total compensation is capped: the highest-paid person cannot make more than 10× the
-            median total compensation (measured annually).
-          </p>
-        </div>
-      </div>
-    </section>
+          <article class="card">
+            <h3 class="card__title">Incentives drive everything</h3>
+            <div class="card__body">
+              <p>
+                Mission and good intention and ethos are almost always overcome by
+                <strong>incentives</strong>. In modern tech, that incentive is almost always
+                <strong>profit</strong>, for the owners and the workers.
+              </p>
+            </div>
+          </article>
 
-    <footer>
-      <p>
-        Tech of Our Own is building the next generation of consumer technology with privacy,
-        autonomy, and longevity at the core.
-      </p>
-      <p><a href="ourbox.html">Explore the OurBox product page →</a></p>
-      <p><a href="https://github.com/techofourown/">See the public Tech of Our Own GitHub →</a></p>
-    </footer>
+          <article class="card">
+            <h3 class="card__title">Close the profit feedback loop</h3>
+            <div class="card__body">
+              <p>
+                By closing the profit feedback loop with users—returning value through dividends—a
+                cooperative can escape the vicious cycle that reliably degrades even the most beloved
+                products and companies over time.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card__title">Remove “exit events”</h3>
+            <div class="card__body">
+              <p>
+                By removing liquidity “exit events” from worker incentives, or "equity sales" to
+                shareholders, the only ones left to serve are the users.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="open">
+        <h2 class="section-block__title">We build in public</h2>
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h3 class="card__title">Open organization, always</h3>
+            <div class="card__body">
+              <p>
+                We keep our organization, documentation, and product work in the open so anyone can
+                inspect decisions, follow progress, or contribute directly.
+              </p>
+              <p>
+                This includes our governance docs, product families, and public roadmaps—because trust
+                means showing the work.
+              </p>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card__title">Contribute on GitHub</h3>
+            <div class="card__body">
+              <p>Explore the full organization to see what we’re working on and where you can help.</p>
+            </div>
+            <div class="site-actions">
+              <a class="button" href={site.githubOrgUrl}>Tech of Our Own on GitHub</a>
+              <a class="button button--secondary" href="https://github.com/techofourown/org-techofourown">
+                Organization docs
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">Shared surplus &amp; transparency</h2>
+        <div class="card-grid card-grid--three">
+          <article class="card">
+            <h3 class="card__title">Surplus returns to the people who make it possible</h3>
+            <div class="card__body">
+              <p>
+                Each year we publish a Dividend Pool: free cash flow minus required reserves and
+                minimum reinvestment. If it is positive, it is split 50/50 between users and workers—no
+                founder toll.
+              </p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Plain-language reporting</h3>
+            <div class="card__body">
+              <p>
+                We publish annual governance reports, reserve status, dividend distributions, and
+                plain-language financial summaries so members can see—clearly—whether we’re upholding
+                the mission.
+              </p>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Pay is capped by a published ratio</h3>
+            <div class="card__body">
+              <p>
+                Total compensation is capped: the highest-paid person cannot make more than 10× the
+                median total compensation (measured annually).
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <SiteFooter
+      description="Tech of Our Own is building the next generation of consumer technology with privacy, autonomy, and longevity at the core."
+      links={[
+        { href: "/ourbox/", label: "Explore the OurBox product page ->" },
+        { href: site.githubOrgUrl, label: "See the public Tech of Our Own GitHub ->", external: true },
+      ]}
+    />
   </main>
 </BaseLayout>

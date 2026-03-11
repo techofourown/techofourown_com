@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import CollectionCard from "../../components/CollectionCard.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import { site } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const hasEntries = Object.keys(import.meta.glob("/src/content/journal/**/*.{md,mdx}")).length > 0;
+const entries = hasEntries
+  ? (await getCollection("journal", ({ data }) => !data.draft)).sort(
+      (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+    )
+  : [];
+---
+
+<BaseLayout title="Journal | Tech of Our Own" description="Public build notes, milestones, and publishing updates.">
+  <main class="site-page">
+    <SiteNav />
+    <div class="site-main">
+      <section class="section-block">
+        <p class="site-hero__eyebrow">Journal</p>
+        <h1 class="section-block__title">Public updates on the house we are building.</h1>
+        <p class="section-block__lede">
+          Journal entries capture visible milestones, publishing changes, and what happens next.
+        </p>
+      </section>
+
+      {
+        entries.length > 0 ? (
+          <section class="collection-grid">
+            {entries.map((entry) => (
+              <CollectionCard
+                href={`/journal/${entry.id}/`}
+                title={entry.data.title}
+                description={entry.data.summary ?? entry.data.description}
+                meta={[entry.data.publishedAt.toISOString().slice(0, 10)]}
+              />
+            ))}
+          </section>
+        ) : (
+          <div class="empty-state">No journal entries yet.</div>
+        )
+      }
+    </div>
+    <SiteFooter
+      description="The journal is where milestones and publishing changes become durable public records."
+      links={[
+        { href: "/ourbox/", label: "Explore OurBox" },
+        { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>

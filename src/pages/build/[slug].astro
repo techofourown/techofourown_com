@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import VideoPlayer from "../../components/VideoPlayer.astro";
+import ContentLayout from "../../layouts/ContentLayout.astro";
+
+export async function getStaticPaths() {
+  const hasEntries = Object.keys(import.meta.glob("/src/content/build/**/*.{md,mdx}")).length > 0;
+  if (!hasEntries) return [];
+
+  const entries = await getCollection("build", ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const metaItems = [
+  { label: "Difficulty", value: entry.data.difficulty },
+  ...(entry.data.estimatedTime ? [{ label: "Time", value: entry.data.estimatedTime }] : []),
+];
+const robots = entry.data.noindex ? "noindex,nofollow" : undefined;
+---
+
+<ContentLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  eyebrow="Build"
+  metaItems={metaItems}
+  robots={robots}
+  referrer={entry.data.referrer}
+>
+  {entry.data.videoUrl && (
+    <VideoPlayer
+      title={entry.data.title}
+      videoUrl={entry.data.videoUrl}
+      difficulty={entry.data.difficulty}
+      runtime={entry.data.runtime}
+    />
+  )}
+  <Content />
+</ContentLayout>

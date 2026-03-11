@@ -5,3 +5,15 @@
   Permissions-Policy: accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
   Content-Security-Policy: default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; media-src 'self' https://media.techofourown.com; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
 */
+
+/learn/matchbox-build-and-setup
+  X-Robots-Tag: noindex, nofollow
+
+/learn/matchbox-build-and-setup/
+  X-Robots-Tag: noindex, nofollow
+
+/build/woodbox-parts-procurement
+  X-Robots-Tag: noindex, nofollow
+
+/build/woodbox-parts-procurement/
+  X-Robots-Tag: noindex, nofollow
