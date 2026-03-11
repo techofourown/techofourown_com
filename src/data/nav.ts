@@ -8,6 +8,6 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/ourbox/", label: "OurBox" },
-  { href: "/journal/", label: "Journal" },
+  { href: "/build/", label: "Build" },
   { href: "https://github.com/techofourown/", label: "GitHub", external: true, action: true },
 ];
