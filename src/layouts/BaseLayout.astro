@@ -1,4 +1,5 @@
 ---
+import { site } from "../data/site";
 import "../styles/theme.css";
 
 interface Props {
@@ -10,10 +11,12 @@ interface Props {
 
 const {
   title,
-  description = "Tech of Our Own builds technology people can truly own—private, durable, and local-first.",
+  description = site.defaultDescription,
   robots,
   referrer,
 } = Astro.props;
+
+const canonicalUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 ---
 
 <!DOCTYPE html>
@@ -25,6 +28,7 @@ const {
     {description && <meta name="description" content={description} />}
     {robots && <meta name="robots" content={robots} />}
     {referrer && <meta name="referrer" content={referrer} />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
   </head>
   <body>
     <slot />
