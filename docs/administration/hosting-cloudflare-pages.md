@@ -4,7 +4,7 @@ Status: current
 Audience: maintainers
 
 ## Overview
-- **App:** Astro source in `src/` with static passthrough files in `public/`.
+- **App:** Astro source in `src/` with infrastructure passthrough files in `public/`.
 - **Host:** Cloudflare Pages project `web-techofourown`.
 - **Media:** `media.techofourown.com` served from Cloudflare R2 + CDN (see `uploading-video-to-r2.md`).
 - **Domains:** `techofourown.com` (apex) and `www.techofourown.com` CNAME to the Pages project, proxied in Cloudflare DNS.
@@ -42,17 +42,25 @@ npx wrangler pages deploy dist --project-name web-techofourown --branch main
 - `media.techofourown.com` unchanged (R2/CDN); do not modify during site deploys.
 - GitHub Pages is disabled for this repository; Cloudflare Pages is the only intended publisher.
 
-## Route compatibility during Phase 3
-- Legacy `.html` routes remain reachable during migration because the files are copied through from `public/`.
-- Cloudflare Pages may canonicalize those routes to extensionless paths with a `308` redirect in practice.
-- Treat the legacy `.html` files as a compatibility layer, not as a guarantee of byte-for-byte legacy URL behavior.
-- When replacing a legacy page with an Astro route, add an explicit redirect and test fragment preservation in a browser.
+## Route compatibility
+- Legacy entry points now resolve through explicit redirects instead of passthrough HTML files.
+- Current redirects:
+  - `/index.html` -> `/`
+  - `/ourbox.html` -> `/ourbox`
+  - `/matchbox_demo` and `/matchbox_demo.html` -> `/learn/matchbox-build-and-setup`
+  - `/woodbox_demo_parts_procurement` and `/woodbox_demo_parts_procurement.html` -> `/build/woodbox-parts-procurement`
+- Cloudflare Pages may still canonicalize legacy paths before the redirect is observed in the browser.
+- Test fragment preservation whenever a redirect targets a route with in-page anchors.
 
 ## Verification checklist (post-deploy)
 - `curl -I https://techofourown.com/` returns 200 with CSP/Permissions-Policy/XFO headers.
-- Key pages load: `/`, `/ourbox.html`, `/matchbox_demo.html`, `/woodbox_demo_parts_procurement.html`.
+- Key pages load: `/`, `/ourbox`, `/learn/matchbox-build-and-setup`, `/build/woodbox-parts-procurement`,
+  `/why`, `/library`, `/journal`.
+- Legacy URLs redirect correctly: `/ourbox.html`, `/matchbox_demo`, `/matchbox_demo.html`,
+  `/woodbox_demo_parts_procurement`, `/woodbox_demo_parts_procurement.html`.
 - Videos stream from `https://media.techofourown.com/...`.
 - Build output contains `_headers` and `_redirects` copied through from `public/`.
+- `public/` contains only `_headers` and `_redirects`.
 
 ## Rollback
 - Redeploy a known-good commit via the workflow or `wrangler pages deploy`.

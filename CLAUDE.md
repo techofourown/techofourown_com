@@ -4,21 +4,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the public-facing website for Tech of Our Own (techofourown.com), a stakeholder-led company building non-extractive consumer technology. The site is now an Astro-based static site that builds to `dist/`, while some legacy `.html` pages remain as passthrough files during the migration.
+This is the public-facing website for Tech of Our Own (techofourown.com), a
+stakeholder-led company building non-extractive consumer technology. The site
+is now a static Astro site that builds to `dist/` and publishes through
+Cloudflare Pages.
 
 **Key pages:**
 - `src/pages/index.astro` - Main landing page describing Tech of Our Own's mission, vision, and governance model
-- `public/ourbox.html` - Temporary legacy passthrough for the OurBox page during migration
-- `public/matchbox_demo.html` - Temporary legacy passthrough for the Matchbox demo page during migration
+- `src/pages/ourbox/index.astro` - Canonical OurBox product page with stable section anchors
+- `src/pages/build/[slug].astro` - Build guide template for content-driven walkthroughs
+- `src/pages/learn/[slug].astro` - Learn-page template for content-driven walkthroughs
+- `src/pages/why/index.astro` - Public philosophy route
+- `src/pages/library/` - Curated public library routes for decisions and RFCs
+- `src/pages/journal/` - Public journal index and entry routes
+- `src/content.config.ts` - Astro content collection definitions
 
 ## Architecture
 
 ### Site Structure
-This is a static Astro site with no client-side JavaScript. Astro pages live under `src/pages/`, shared styling lives in `src/styles/`, and raw passthrough assets live in `public/`. Some legacy HTML pages still carry inline CSS while they await migration. The design uses:
+This is a static Astro site with no client-side JavaScript. Astro pages live
+under `src/pages/`, content collections live under `src/content/`, shared
+layouts/components live under `src/layouts/` and `src/components/`, and
+infrastructure passthrough files live in `public/`. The design uses:
 - CSS custom properties for theming (color scheme, shadows, spacing)
 - Responsive grid layouts with `auto-fit` for cards and sections
 - Modern CSS features (clamp, radial-gradient, backdrop-filter)
 - Mobile-first responsive design with media queries
+- A script-free CSP that should stay intact unless there is an explicit reason
+  to loosen it
 
 ### Documentation System
 The `docs/` directory organizes documentation by purpose:
@@ -84,8 +97,8 @@ Active hooks in `.git/hooks/`:
 
 ### Making Changes
 ```bash
-# Edit Astro pages in src/pages/ and shared styles in src/styles/
-# Legacy passthrough .html pages live in public/ during the migration
+# Edit Astro pages in src/pages/, content entries in src/content/,
+# and shared styles in src/styles/
 
 # Run the Astro dev server locally
 npm install
@@ -115,7 +128,10 @@ cp docs/decisions/0000-template.md docs/decisions/ADR-0002-your-decision.md
 ```
 
 ### Deployment
-The site deploys automatically via Cloudflare Pages. GitHub Actions runs `npm ci` and `npm run build`, then publishes `dist/` to the custom domain `techofourown.com`. Media remains first-party on `https://media.techofourown.com` (Cloudflare R2 + CDN).
+The site deploys automatically via Cloudflare Pages. GitHub Actions runs
+`npm ci`, `npm run check`, and `npm run build`, then publishes `dist/` with
+`wrangler pages deploy` to the custom domain `techofourown.com`. Media remains
+first-party on `https://media.techofourown.com` (Cloudflare R2 + CDN).
 
 ## Project Values and Constraints
 
