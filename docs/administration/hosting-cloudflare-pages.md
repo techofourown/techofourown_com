@@ -46,16 +46,16 @@ npx wrangler pages deploy dist --project-name web-techofourown --branch main
 - Legacy entry points now resolve through explicit redirects instead of passthrough HTML files.
 - Current redirects:
   - `/index.html` -> `/`
-  - `/ourbox.html` -> `/ourbox`
-  - `/matchbox_demo` and `/matchbox_demo.html` -> `/learn/matchbox-build-and-setup`
-  - `/woodbox_demo_parts_procurement` and `/woodbox_demo_parts_procurement.html` -> `/build/woodbox-parts-procurement`
-- Cloudflare Pages may still canonicalize legacy paths before the redirect is observed in the browser.
+  - `/ourbox.html` -> `/ourbox/`
+  - `/matchbox_demo` and `/matchbox_demo.html` -> `/learn/matchbox-build-and-setup/`
+  - `/woodbox_demo_parts_procurement` and `/woodbox_demo_parts_procurement.html` -> `/build/woodbox-parts-procurement/`
+- Cloudflare Pages serves slashful canonical routes for directory pages, so slashless requests may redirect to their trailing-slash form first.
 - Test fragment preservation whenever a redirect targets a route with in-page anchors.
 
 ## Verification checklist (post-deploy)
 - `curl -I https://techofourown.com/` returns 200 with CSP/Permissions-Policy/XFO headers.
-- Key pages load: `/`, `/ourbox`, `/learn/matchbox-build-and-setup`, `/build/woodbox-parts-procurement`,
-  `/why`, `/library`, `/journal`.
+- Key pages load: `/`, `/ourbox/`, `/learn/matchbox-build-and-setup/`, `/build/woodbox-parts-procurement/`,
+  `/why/`, `/library/`, `/journal/`.
 - Legacy URLs redirect correctly: `/ourbox.html`, `/matchbox_demo`, `/matchbox_demo.html`,
   `/woodbox_demo_parts_procurement`, `/woodbox_demo_parts_procurement.html`.
 - Videos stream from `https://media.techofourown.com/...`.

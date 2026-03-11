@@ -35,7 +35,7 @@ const entries = hasEntries
           <section class="collection-grid">
             {entries.map((entry) => (
               <CollectionCard
-                href={`/apps/${entry.id}`}
+                href={`/apps/${entry.id}/`}
                 title={entry.data.title}
                 description={entry.data.summary ?? entry.data.description}
                 meta={[entry.data.status]}
@@ -50,7 +50,7 @@ const entries = hasEntries
     <SiteFooter
       description="Apps stay out of the nav until there is real content to point people to."
       links={[
-        { href: "/ourbox", label: "Explore OurBox" },
+        { href: "/ourbox/", label: "Explore OurBox" },
         { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
       ]}
     />

@@ -35,7 +35,7 @@ const entries = hasEntries
           <section class="collection-grid">
             {entries.map((entry) => (
               <CollectionCard
-                href={`/learn/${entry.id}`}
+                href={`/learn/${entry.id}/`}
                 title={entry.data.title}
                 description={entry.data.summary ?? entry.data.description}
                 meta={[entry.data.runtime ?? "", entry.data.noindex ? "Noindex" : ""].filter(Boolean)}
@@ -50,7 +50,7 @@ const entries = hasEntries
     <SiteFooter
       description="Learn pages stay static-first and first-party. Videos stream directly from our media origin."
       links={[
-        { href: "/ourbox", label: "Explore OurBox" },
+        { href: "/ourbox/", label: "Explore OurBox" },
         { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
       ]}
     />

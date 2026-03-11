@@ -55,4 +55,4 @@ Clearance, connector types, drive sizes, and the places where spec sheets leave 
 The website keeps the public explanation high-level. The detailed, versioned record stays in the repositories.
 
 - [OurBox docs on GitHub](https://github.com/techofourown/pf-ourbox)
-- [Meet the OurBox family](/ourbox#family)
+- [Meet the OurBox family](/ourbox/#family)

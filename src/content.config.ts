@@ -29,6 +29,7 @@ const build = defineCollection({
     publishedAt: z.coerce.date().optional(),
     difficulty: z.enum(["easy", "medium", "hard"]).default("medium"),
     estimatedTime: z.string().optional(),
+    runtime: z.string().optional(),
     videoUrl: z.url().optional(),
     noindex: z.boolean().default(false),
     referrer: z.string().optional(),

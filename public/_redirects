@@ -1,6 +1,6 @@
 /index.html / 301
-/ourbox.html /ourbox 301
-/matchbox_demo /learn/matchbox-build-and-setup 301
-/matchbox_demo.html /learn/matchbox-build-and-setup 301
-/woodbox_demo_parts_procurement /build/woodbox-parts-procurement 301
-/woodbox_demo_parts_procurement.html /build/woodbox-parts-procurement 301
+/ourbox.html /ourbox/ 301
+/matchbox_demo /learn/matchbox-build-and-setup/ 301
+/matchbox_demo.html /learn/matchbox-build-and-setup/ 301
+/woodbox_demo_parts_procurement /build/woodbox-parts-procurement/ 301
+/woodbox_demo_parts_procurement.html /build/woodbox-parts-procurement/ 301

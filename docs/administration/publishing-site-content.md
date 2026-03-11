@@ -7,7 +7,7 @@ Audience: maintainers
 The public site is an Astro site with content collections defined in
 `src/content.config.ts`.
 
-Use Astro pages for high-structure marketing surfaces such as `/` and `/ourbox`.
+Use Astro pages for high-structure marketing surfaces such as `/` and `/ourbox/`.
 Use content entries for repeatable public material such as build guides, learn
 pages, philosophy essays, journal entries, and curated library entries.
 
@@ -26,7 +26,7 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    - `noindex` and `referrer` for non-indexed walkthroughs
 3. Write the body in Markdown.
 4. Run `npm run check && npm run build`.
-5. Verify the page at `/learn/<slug>`.
+5. Verify the page at `/learn/<slug>/`.
 
 ## Add a build entry
 1. Create a Markdown file in `src/content/build/`.
@@ -41,21 +41,21 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    - `videoUrl` when a video exists
    - `noindex` and `referrer` for non-indexed walkthroughs
 3. Run `npm run check && npm run build`.
-4. Verify the page at `/build/<slug>`.
+4. Verify the page at `/build/<slug>/`.
 
 ## Add a journal entry
 1. Create a Markdown file in `src/content/journal/`.
 2. Include `title`, `description`, `summary` (optional), `draft`, `order`
    (optional), and `publishedAt`.
 3. Run `npm run check && npm run build`.
-4. Verify the entry at `/journal/<slug>` and in `/journal`.
+4. Verify the entry at `/journal/<slug>/` and in `/journal/`.
 
 ## Add a philosophy entry
 1. Create a Markdown file in `src/content/philosophy/`.
 2. Include `title`, `description`, `summary` (optional), `draft`, `order`
    (optional), and `publishedAt`.
 3. Run `npm run check && npm run build`.
-4. Verify it appears in `/why`.
+4. Verify it appears in `/why/`.
 
 ## Publish a public ADR or RFC
 1. Start from the repository source material in `docs/decisions/` or `docs/rfcs/`.
@@ -66,7 +66,7 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
 4. Remove maintainer-only framing, operational clutter, and repo-internal assumptions.
 5. Link back to GitHub as source material, not as the primary reading surface.
 6. Run `npm run check && npm run build`.
-7. Verify `/library`, `/library/decisions`, and `/library/rfcs`.
+7. Verify `/library/`, `/library/decisions/`, and `/library/rfcs/`.
 
 ## What stays repo-only
 These materials remain in the repository and should not be auto-published:

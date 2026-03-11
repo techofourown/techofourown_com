@@ -34,7 +34,7 @@ const entries = hasEntries
           <section class="collection-grid">
             {entries.map((entry) => (
               <CollectionCard
-                href={`/library/rfcs/${entry.id}`}
+                href={`/library/rfcs/${entry.id}/`}
                 title={entry.data.title}
                 description={entry.data.summary ?? entry.data.description}
                 meta={[entry.data.status]}
@@ -49,7 +49,7 @@ const entries = hasEntries
     <SiteFooter
       description="RFCs remain intentionally empty until there is real public material to publish."
       links={[
-        { href: "/library", label: "Back to Library" },
+        { href: "/library/", label: "Back to Library" },
         { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
       ]}
     />

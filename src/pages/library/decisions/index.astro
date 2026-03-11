@@ -35,7 +35,7 @@ const entries = hasEntries
           <section class="collection-grid">
             {entries.map((entry) => (
               <CollectionCard
-                href={`/library/decisions/${entry.id}`}
+                href={`/library/decisions/${entry.id}/`}
                 title={entry.data.title}
                 description={entry.data.summary ?? entry.data.description}
                 meta={[entry.data.status]}
@@ -50,7 +50,7 @@ const entries = hasEntries
     <SiteFooter
       description="Public decisions are adapted for readers; maintainer-only operational docs stay in the repo."
       links={[
-        { href: "/library", label: "Back to Library" },
+        { href: "/library/", label: "Back to Library" },
         { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
       ]}
     />

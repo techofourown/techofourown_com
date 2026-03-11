@@ -62,4 +62,4 @@ The walkthrough also covers common failure modes, debugging approaches, and how 
 The public site keeps the walkthrough readable. The living technical record, bill of materials, and hardware notes stay in the repository where changes are versioned.
 
 - [Matchbox docs on GitHub](https://github.com/techofourown/pf-ourbox/tree/main/hw/matchbox)
-- [Learn about OurBox](/ourbox)
+- [Learn about OurBox](/ourbox/)

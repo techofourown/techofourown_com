@@ -19,8 +19,6 @@ const renderedEssays = await Promise.all(
     Content: (await render(entry)).Content,
   })),
 );
-
-const featuredEssay = renderedEssays[0];
 ---
 
 <BaseLayout title="Why | Tech of Our Own" description="Why Tech of Our Own is building technology people can truly own.">
@@ -42,27 +40,27 @@ const featuredEssay = renderedEssays[0];
             <section class="collection-grid">
               {renderedEssays.map(({ entry }) => (
                 <CollectionCard
-                  href={`/why#essay-${entry.id}`}
+                  href={`/why/#essay-${entry.id}`}
                   title={entry.data.title}
                   description={entry.data.summary ?? entry.data.description}
                 />
               ))}
             </section>
 
-            {featuredEssay && (
-              <section class="section-block" id={`essay-${featuredEssay.entry.id}`}>
+            {renderedEssays.map(({ entry, Content }, index) => (
+              <section class="section-block" id={`essay-${entry.id}`}>
                 <article class="content-layout">
                   <header class="content-layout__header">
-                    <p class="site-hero__eyebrow">Featured Essay</p>
-                    <h2 class="content-layout__title">{featuredEssay.entry.data.title}</h2>
-                    <p class="content-layout__description">{featuredEssay.entry.data.description}</p>
+                    <p class="site-hero__eyebrow">{index === 0 ? "Featured Essay" : "Essay"}</p>
+                    <h2 class="content-layout__title">{entry.data.title}</h2>
+                    <p class="content-layout__description">{entry.data.description}</p>
                   </header>
                   <div class="prose">
-                    <featuredEssay.Content />
+                    <Content />
                   </div>
                 </article>
               </section>
-            )}
+            ))}
           </>
         ) : (
           <div class="empty-state">No public philosophy essays yet.</div>
@@ -72,7 +70,7 @@ const featuredEssay = renderedEssays[0];
     <SiteFooter
       description="The public philosophy section keeps the long-term argument visible, linkable, and durable."
       links={[
-        { href: "/ourbox", label: "Explore OurBox" },
+        { href: "/ourbox/", label: "Explore OurBox" },
         { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
       ]}
     />
