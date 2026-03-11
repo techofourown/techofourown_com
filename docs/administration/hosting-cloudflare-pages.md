@@ -15,7 +15,7 @@ Audience: maintainers
 ### Automated (default)
 - Workflow: `.github/workflows/cloudflare-pages.yml`
 - Trigger: push to `main`
-- Action: `cloudflare/pages-action@v1`
+- Publish command: `npx wrangler pages deploy dist --project-name web-techofourown --branch main`
 - Build steps: `npm ci`, `npm run check`, then `npm run build`
 - Required repo secrets:
   - `CLOUDFLARE_API_TOKEN` — token with **Pages:Edit** on account `3c20efc51551c69eba728cdb54093b6b`
@@ -29,12 +29,12 @@ npm run build
 
 export CLOUDFLARE_API_TOKEN=...   # Pages:Edit scope
 export CLOUDFLARE_ACCOUNT_ID=3c20efc51551c69eba728cdb54093b6b
-wrangler pages deploy dist --project-name web-techofourown --branch main
+npx wrangler pages deploy dist --project-name web-techofourown --branch main
 ```
 
 ### Manual preview deploys
 - Non-`main` branch previews are manual for now.
-- Use `wrangler pages deploy dist --project-name web-techofourown --branch <branch-name>` after `npm run build`.
+- Use `npx wrangler pages deploy dist --project-name web-techofourown --branch <branch-name>` after `npm run build`.
 
 ## DNS
 - `techofourown.com` → CNAME `web-techofourown.pages.dev` (proxied)
