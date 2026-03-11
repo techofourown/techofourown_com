@@ -1,0 +1,30 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  eyebrow?: string;
+  meta?: string[];
+}
+
+const { href, title, description, eyebrow, meta = [] } = Astro.props;
+---
+
+<article class="card collection-card">
+  {eyebrow && <p class="collection-card__eyebrow">{eyebrow}</p>}
+  <h2 class="card__title">
+    <a href={href}>{title}</a>
+  </h2>
+  <div class="card__body">
+    <p>{description}</p>
+    {
+      meta.length > 0 && (
+        <ul class="collection-card__meta">
+          {meta.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>

@@ -1,0 +1,35 @@
+---
+import CollectionCard from "../../components/CollectionCard.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import { site } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Library | Tech of Our Own" description="Curated public decisions, RFCs, and reference material.">
+  <main class="site-page">
+    <SiteNav />
+    <div class="site-main">
+      <section class="section-block">
+        <p class="site-hero__eyebrow">Library</p>
+        <h1 class="section-block__title">Curated public reference material.</h1>
+        <p class="section-block__lede">
+          The public library is curated. Maintainer docs and operational notes stay in the repo; public
+          decisions and RFCs get their own reading surface here.
+        </p>
+      </section>
+
+      <section class="collection-grid">
+        <CollectionCard href="/library/decisions" title="Decisions" description="Public architectural decisions and their tradeoffs." />
+        <CollectionCard href="/library/rfcs" title="RFCs" description="Public requests for comment and design discussions when they are ready." />
+      </section>
+    </div>
+    <SiteFooter
+      description="The library is curated on purpose; repo-only docs do not automatically become public pages."
+      links={[
+        { href: "/ourbox", label: "Explore OurBox" },
+        { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>
