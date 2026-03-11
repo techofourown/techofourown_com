@@ -53,8 +53,6 @@ This repository enforces strict commit message standards via git hooks. All comm
 <type>: <subject>
 
 <body>
-
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 ```
 
 **Required elements:**
@@ -66,13 +64,13 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 ### Single Authorship Principle
 This repository enforces **single authorship** - each commit has ONE author who takes full responsibility. The git hooks will REJECT commits that contain:
 - Email addresses anywhere in commit messages (privacy + single authorship)
-- "Co-Authored-By" trailers (except for Claude Code's standardized trailer)
+- "Co-Authored-By" trailers of any kind
 - Any external attribution patterns (Generated with, Thanks to, Assisted by, etc.)
 - Tool/entity mentions suggesting shared authorship (Claude, ChatGPT, Copilot, AI, etc.)
 
 **Why:** Collaboration happens in PRs/issues, not commit messages. Git metadata already records authorship. Attribution dilutes responsibility.
 
-**When committing work assisted by Claude Code:** You (the human) are the sole author. The standard Claude co-authorship trailer is required by Claude Code's commit process, but YOU are still the single responsible author.
+**When committing work assisted by Claude Code:** You (the human) write the commit and sign it yourself. Do **not** add Co-Authored-By trailers; the hooks enforce single authorship.
 
 ### Git Hooks
 Active hooks in `.git/hooks/`:
@@ -98,8 +96,6 @@ git commit -m "$(cat <<'EOF'
 docs: update governance section
 
 Revised the governance model description to clarify user and worker representation on the board.
-
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 EOF
 )"
 
@@ -119,7 +115,7 @@ cp docs/decisions/0000-template.md docs/decisions/ADR-0002-your-decision.md
 ```
 
 ### Deployment
-The site deploys automatically via GitHub Pages to techofourown.com. No manual deployment steps required - just push to main.
+The site deploys automatically via Cloudflare Pages. No build step is required; Pages serves the repo root. Pushes to `main` publish to the custom domain `techofourown.com`, and pull requests create preview deploys. Media remains first-party on `https://media.techofourown.com` (Cloudflare R2 + CDN).
 
 ## Project Values and Constraints
 
