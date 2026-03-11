@@ -7,6 +7,6 @@ export type NavItem = {
 
 export const navItems: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "ourbox.html", label: "OurBox" },
+  { href: "/ourbox", label: "OurBox" },
   { href: "https://github.com/techofourown/", label: "GitHub", external: true, action: true },
 ];

@@ -21,7 +21,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="site-actions">
           <a class="button" href="#mission">Mission &amp; Vision</a>
           <a class="button button--secondary" href="#governance">Governance Model</a>
-          <a class="button button--secondary" href="ourbox.html">Explore OurBox</a>
+          <a class="button button--secondary" href="/ourbox">Explore OurBox</a>
           <a class="button button--secondary" href={site.githubOrgUrl}>View our public GitHub</a>
         </div>
       </section>
@@ -318,7 +318,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <SiteFooter
       description="Tech of Our Own is building the next generation of consumer technology with privacy, autonomy, and longevity at the core."
       links={[
-        { href: "ourbox.html", label: "Explore the OurBox product page ->" },
+        { href: "/ourbox", label: "Explore the OurBox product page ->" },
         { href: site.githubOrgUrl, label: "See the public Tech of Our Own GitHub ->", external: true },
       ]}
     />
