@@ -4,17 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the public-facing website for Tech of Our Own (techofourown.com), a stakeholder-led company building non-extractive consumer technology. The site consists of static HTML pages with inline CSS, no build process required.
+This is the public-facing website for Tech of Our Own (techofourown.com), a stakeholder-led company building non-extractive consumer technology. The site is now an Astro-based static site that builds to `dist/`, while some legacy `.html` pages remain as passthrough files during the migration.
 
 **Key pages:**
-- `index.html` - Main landing page describing Tech of Our Own's mission, vision, and governance model
-- `ourbox.html` - Product page for OurBox, the flagship local-first home server appliance
-- `CNAME` - DNS configuration for GitHub Pages deployment to techofourown.com
+- `src/pages/index.astro` - Main landing page describing Tech of Our Own's mission, vision, and governance model
+- `public/ourbox.html` - Temporary legacy passthrough for the OurBox page during migration
+- `public/matchbox_demo.html` - Temporary legacy passthrough for the Matchbox demo page during migration
 
 ## Architecture
 
 ### Site Structure
-This is a simple static website with no frameworks, no bundlers, and no JavaScript. All styling is inline CSS within `<style>` tags in each HTML file. The design uses:
+This is a static Astro site with no client-side JavaScript. Astro pages live under `src/pages/`, shared styling lives in `src/styles/`, and raw passthrough assets live in `public/`. Some legacy HTML pages still carry inline CSS while they await migration. The design uses:
 - CSS custom properties for theming (color scheme, shadows, spacing)
 - Responsive grid layouts with `auto-fit` for cards and sections
 - Modern CSS features (clamp, radial-gradient, backdrop-filter)
@@ -84,12 +84,12 @@ Active hooks in `.git/hooks/`:
 
 ### Making Changes
 ```bash
-# Edit HTML files directly - no build step needed
-# CSS is inline in each HTML file
+# Edit Astro pages in src/pages/ and shared styles in src/styles/
+# Legacy passthrough .html pages live in public/ during the migration
 
-# Test locally by opening files in browser
-open index.html  # macOS
-xdg-open index.html  # Linux
+# Run the Astro dev server locally
+npm install
+npm run dev
 
 # Commit with proper format
 git commit -m "$(cat <<'EOF'
@@ -115,7 +115,7 @@ cp docs/decisions/0000-template.md docs/decisions/ADR-0002-your-decision.md
 ```
 
 ### Deployment
-The site deploys automatically via Cloudflare Pages. No build step is required; Pages serves the repo root. Pushes to `main` publish to the custom domain `techofourown.com`, and pull requests create preview deploys. Media remains first-party on `https://media.techofourown.com` (Cloudflare R2 + CDN).
+The site deploys automatically via Cloudflare Pages. GitHub Actions runs `npm ci` and `npm run build`, then publishes `dist/` to the custom domain `techofourown.com`. Media remains first-party on `https://media.techofourown.com` (Cloudflare R2 + CDN).
 
 ## Project Values and Constraints
 
