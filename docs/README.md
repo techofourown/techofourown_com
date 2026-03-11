@@ -7,6 +7,7 @@ This repository uses a lightweight documentation structure focused on RFCs and A
 ```
 docs/
 ├── administration/  # Operational guides and procedures
+│   └── hosting-cloudflare-pages.md  # Site hosting + deployment
 ├── rfcs/            # Pre-decisional exploration and proposals
 └── decisions/       # Architecture Decision Records (ADRs)
 ```
