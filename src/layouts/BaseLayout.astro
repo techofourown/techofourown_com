@@ -1,0 +1,32 @@
+---
+import "../styles/theme.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  robots?: string;
+  referrer?: string;
+}
+
+const {
+  title,
+  description = "Tech of Our Own builds technology people can truly own—private, durable, and local-first.",
+  robots,
+  referrer,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {robots && <meta name="robots" content={robots} />}
+    {referrer && <meta name="referrer" content={referrer} />}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
