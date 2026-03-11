@@ -2,8 +2,6 @@ name: Site Build
 
 on:
   pull_request:
-  push:
-    branches: [main]
 
 jobs:
   build:
@@ -22,6 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check site
+        run: npm run check
 
       - name: Build site
         run: npm run build

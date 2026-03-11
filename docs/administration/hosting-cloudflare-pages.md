@@ -16,14 +16,15 @@ Audience: maintainers
 - Workflow: `.github/workflows/cloudflare-pages.yml`
 - Trigger: push to `main`
 - Action: `cloudflare/pages-action@v1`
-- Build steps: `npm ci` then `npm run build`
+- Build steps: `npm ci`, `npm run check`, then `npm run build`
 - Required repo secrets:
   - `CLOUDFLARE_API_TOKEN` — token with **Pages:Edit** on account `3c20efc51551c69eba728cdb54093b6b`
   - `CLOUDFLARE_ACCOUNT_ID` — set to `3c20efc51551c69eba728cdb54093b6b`
-- Output: publishes `dist/` to Cloudflare Pages production; previews come from the Pages `*.pages.dev` URL per commit.
+- Output: publishes `dist/` to Cloudflare Pages production from `main` only.
 
 ### Manual (fallback)
 ```
+npm run check
 npm run build
 
 export CLOUDFLARE_API_TOKEN=...   # Pages:Edit scope
@@ -31,11 +32,21 @@ export CLOUDFLARE_ACCOUNT_ID=3c20efc51551c69eba728cdb54093b6b
 wrangler pages deploy dist --project-name web-techofourown --branch main
 ```
 
+### Manual preview deploys
+- Non-`main` branch previews are manual for now.
+- Use `wrangler pages deploy dist --project-name web-techofourown --branch <branch-name>` after `npm run build`.
+
 ## DNS
 - `techofourown.com` → CNAME `web-techofourown.pages.dev` (proxied)
 - `www.techofourown.com` → CNAME `web-techofourown.pages.dev` (proxied)
 - `media.techofourown.com` unchanged (R2/CDN); do not modify during site deploys.
-- GitHub Pages A/AAAA records removed; GitHub Pages should stay disabled in repo settings.
+- GitHub Pages is disabled for this repository; Cloudflare Pages is the only intended publisher.
+
+## Route compatibility during Phase 3
+- Legacy `.html` routes remain reachable during migration because the files are copied through from `public/`.
+- Cloudflare Pages may canonicalize those routes to extensionless paths with a `308` redirect in practice.
+- Treat the legacy `.html` files as a compatibility layer, not as a guarantee of byte-for-byte legacy URL behavior.
+- When replacing a legacy page with an Astro route, add an explicit redirect and test fragment preservation in a browser.
 
 ## Verification checklist (post-deploy)
 - `curl -I https://techofourown.com/` returns 200 with CSP/Permissions-Policy/XFO headers.
