@@ -1,20 +1,26 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import CollectionCard from "../../components/CollectionCard.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import { site } from "../../data/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const hasEntries = Object.keys(import.meta.glob("/src/content/philosophy/**/*.{md,mdx}")).length > 0;
-const essays = hasEntries
-  ? (await getCollection("philosophy", ({ data }) => !data.draft)).sort((a, b) => {
-      const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
-      const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
-      if (orderA !== orderB) return orderA - orderB;
-      return (b.data.publishedAt?.getTime() ?? 0) - (a.data.publishedAt?.getTime() ?? 0);
-    })
-  : [];
+const essays = (await getCollection("philosophy", ({ data }) => !data.draft)).sort((a, b) => {
+  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+  if (orderA !== orderB) return orderA - orderB;
+  return (b.data.publishedAt?.getTime() ?? 0) - (a.data.publishedAt?.getTime() ?? 0);
+});
+
+const renderedEssays = await Promise.all(
+  essays.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+
+const featuredEssay = renderedEssays[0];
 ---
 
 <BaseLayout title="Why | Tech of Our Own" description="Why Tech of Our Own is building technology people can truly own.">
@@ -25,22 +31,39 @@ const essays = hasEntries
         <p class="site-hero__eyebrow">Why</p>
         <h1 class="section-block__title">Why ownership, local-first design, and incentives matter.</h1>
         <p class="section-block__lede">
-          Philosophy essays live here. This is where the durable arguments behind the product and the
-          institution become easier to link, revisit, and extend.
+          This section keeps the long-term argument visible and linkable. It is where the product,
+          the institution, and the incentive structure are explained in plain terms.
         </p>
       </section>
 
       {
-        essays.length > 0 ? (
-          <section class="collection-grid">
-            {essays.map((entry) => (
-              <CollectionCard
-                href="/why"
-                title={entry.data.title}
-                description={entry.data.summary ?? entry.data.description}
-              />
-            ))}
-          </section>
+        renderedEssays.length > 0 ? (
+          <>
+            <section class="collection-grid">
+              {renderedEssays.map(({ entry }) => (
+                <CollectionCard
+                  href={`/why#essay-${entry.id}`}
+                  title={entry.data.title}
+                  description={entry.data.summary ?? entry.data.description}
+                />
+              ))}
+            </section>
+
+            {featuredEssay && (
+              <section class="section-block" id={`essay-${featuredEssay.entry.id}`}>
+                <article class="content-layout">
+                  <header class="content-layout__header">
+                    <p class="site-hero__eyebrow">Featured Essay</p>
+                    <h2 class="content-layout__title">{featuredEssay.entry.data.title}</h2>
+                    <p class="content-layout__description">{featuredEssay.entry.data.description}</p>
+                  </header>
+                  <div class="prose">
+                    <featuredEssay.Content />
+                  </div>
+                </article>
+              </section>
+            )}
+          </>
         ) : (
           <div class="empty-state">No public philosophy essays yet.</div>
         )

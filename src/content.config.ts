@@ -73,7 +73,6 @@ const decisions = defineCollection({
 });
 
 const rfcs = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/rfcs" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -86,7 +85,6 @@ const rfcs = defineCollection({
 });
 
 const apps = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/apps" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
