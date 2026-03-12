@@ -11,6 +11,8 @@ if (!woodbox) {
 }
 
 const woodboxDocsUrl = woodbox.docsUrl;
+const woodboxBomUrl =
+  "https://github.com/techofourown/pf-ourbox/blob/main/hw/woodbox/docs/specs/bom-JU3XK8.md";
 
 if (!woodboxDocsUrl) {
   throw new Error("Woodbox docs URL is missing.");
@@ -88,26 +90,35 @@ if (!woodboxDocsUrl) {
       </section>
 
       <section class="section-block">
-        <h2 class="section-block__title">What this page will eventually contain</h2>
+        <h2 class="section-block__title">Build materials and support</h2>
         <div class="card-grid card-grid--two">
           <article class="card">
-            <h3 class="card__title">Build and setup materials</h3>
+            <h3 class="card__title">Current bill of materials</h3>
             <div class="card__body">
               <ul class="bullet-list">
-                <li>Hardware bill of materials</li>
-                <li>Assembly steps</li>
-                <li>Install and provision steps</li>
-                <li>Software and app setup</li>
+                <li>ASRock N100M motherboard with integrated CPU</li>
+                <li>Antec NX200M case</li>
+                <li>NVIDIA Tesla P100 16GB GPU</li>
+                <li>GPU shroud and blower fan</li>
+                <li>750W power supply</li>
+                <li>16GB DDR4 RAM</li>
+                <li>128GB NVMe OS drive</li>
+                <li>6TB SATA HDD for user data</li>
               </ul>
+            </div>
+            <div class="site-actions">
+              <a class="button" href={woodboxBomUrl}>Open the bill of materials</a>
             </div>
           </article>
           <article class="card">
-            <h3 class="card__title">Support materials</h3>
+            <h3 class="card__title">Still to add</h3>
             <div class="card__body">
               <ul class="bullet-list">
+                <li>Assembly steps</li>
+                <li>Install and provision steps</li>
+                <li>Software and app setup</li>
                 <li>Troubleshooting</li>
                 <li>Photos</li>
-                <li>Video walkthrough</li>
                 <li>Path-specific discussion thread</li>
               </ul>
             </div>
