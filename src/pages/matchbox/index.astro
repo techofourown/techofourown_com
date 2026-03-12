@@ -1,6 +1,7 @@
 ---
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteNav from "../../components/SiteNav.astro";
+import VideoPlayer from "../../components/VideoPlayer.astro";
 import { ourBoxPaths } from "../../data/ourbox-paths";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -11,9 +12,16 @@ if (!matchbox) {
 }
 
 const matchboxDocsUrl = matchbox.docsUrl;
+const matchboxVideoUrl = matchbox.videoUrl;
+const matchboxBomUrl =
+  "https://github.com/techofourown/pf-ourbox/blob/main/hw/matchbox/docs/specs/bom-K7M2QF.md";
 
 if (!matchboxDocsUrl) {
   throw new Error("Matchbox docs URL is missing.");
+}
+
+if (!matchboxVideoUrl) {
+  throw new Error("Matchbox video URL is missing.");
 }
 ---
 
@@ -89,26 +97,32 @@ if (!matchboxDocsUrl) {
       </section>
 
       <section class="section-block">
-        <h2 class="section-block__title">What this page will eventually contain</h2>
+        <h2 class="section-block__title">Build materials and support</h2>
         <div class="card-grid card-grid--two">
           <article class="card">
-            <h3 class="card__title">Build and setup materials</h3>
+            <h3 class="card__title">Current bill of materials</h3>
             <div class="card__body">
               <ul class="bullet-list">
-                <li>Hardware bill of materials</li>
-                <li>Assembly steps</li>
-                <li>Install and provision steps</li>
-                <li>Software and app setup</li>
+                <li>Raspberry Pi 5 (16 GB RAM)</li>
+                <li>Dual NVMe SSD HAT</li>
+                <li>Sheet metal enclosure</li>
+                <li>Passive cooling heatsink</li>
+                <li>Power brick</li>
               </ul>
+            </div>
+            <div class="site-actions">
+              <a class="button" href={matchboxBomUrl}>Open the bill of materials</a>
             </div>
           </article>
           <article class="card">
-            <h3 class="card__title">Support materials</h3>
+            <h3 class="card__title">Still to add</h3>
             <div class="card__body">
               <ul class="bullet-list">
+                <li>Assembly steps</li>
+                <li>Install and provision steps</li>
+                <li>Software and app setup</li>
                 <li>Troubleshooting</li>
                 <li>Photos</li>
-                <li>Video walkthrough</li>
                 <li>Path-specific discussion thread</li>
               </ul>
             </div>
@@ -119,14 +133,17 @@ if (!matchboxDocsUrl) {
       <section class="section-block">
         <h2 class="section-block__title">Video walkthrough</h2>
         <article class="card">
-          <h3 class="card__title">Coming soon</h3>
+          <h3 class="card__title">Current walkthrough</h3>
           <div class="card__body">
-            <!-- TODO: add canonical video when ready -->
             <p>
-              Video walkthrough coming soon. This page is the canonical landing surface for that
-              future video.
+              This is the current Matchbox walkthrough.
             </p>
           </div>
+          <VideoPlayer
+            title="Build and provision your own Matchbox"
+            videoUrl={matchboxVideoUrl}
+            runtime="~45 minutes"
+          />
         </article>
       </section>
 

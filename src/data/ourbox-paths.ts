@@ -19,6 +19,7 @@ export const ourBoxPaths: OurBoxPath[] = [
     platform: "Raspberry Pi",
     status: "Foundational page",
     docsUrl: "https://github.com/techofourown/pf-ourbox/tree/main/hw/matchbox",
+    videoUrl: "https://media.techofourown.com/videos/matchbox_demo.mp4",
   },
   {
     key: "woodbox",
