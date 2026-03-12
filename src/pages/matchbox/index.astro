@@ -1,0 +1,169 @@
+---
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import { ourBoxPaths } from "../../data/ourbox-paths";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const matchbox = ourBoxPaths.find((path) => path.key === "matchbox");
+
+if (!matchbox) {
+  throw new Error("Matchbox path metadata is missing.");
+}
+
+const matchboxDocsUrl = matchbox.docsUrl;
+
+if (!matchboxDocsUrl) {
+  throw new Error("Matchbox docs URL is missing.");
+}
+---
+
+<BaseLayout title="Matchbox | Tech of Our Own" description={matchbox.summary}>
+  <main class="site-page">
+    <SiteNav />
+
+    <div class="site-main">
+      <section class="site-hero">
+        <span class="site-hero__eyebrow">OurBox / Matchbox</span>
+        <h1 class="site-hero__title">Matchbox</h1>
+        <p class="site-hero__lede">
+          Matchbox is the Raspberry Pi path: compact, quiet, and designed for an always-on personal
+          server that you can build yourself.
+        </p>
+        <div class="site-actions">
+          <a class="button" href={matchboxDocsUrl}>GitHub docs</a>
+          <a class="button button--secondary" href="/ourbox/">Back to OurBox</a>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">At a glance</h2>
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h3 class="card__title">Platform</h3>
+            <div class="card__body"><p>Raspberry Pi</p></div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Best for</h3>
+            <div class="card__body"><p>Compact, quiet, always-on home use.</p></div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Status</h3>
+            <div class="card__body"><p>Foundational page, expanding over time.</p></div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Current phase</h3>
+            <div class="card__body"><p>Build-it-yourself.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">What Matchbox is</h2>
+        <div class="prose">
+          <!-- TODO: replace with final Matchbox positioning copy -->
+          <p>
+            Matchbox is the smallest public OurBox path. It is the practical starting point for
+            someone who wants a personal server that can live quietly on a shelf and stay on all the
+            time.
+          </p>
+          <p>
+            This page is the canonical landing surface for the Raspberry Pi path. The deep build and
+            provisioning material will plug into this page over time, but the page itself should stay
+            readable even before all of that detail is written.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">Who should choose Matchbox</h2>
+        <article class="card">
+          <div class="card__body">
+            <ul class="bullet-list">
+              <li>People who want the smallest practical entry point into self-hosting.</li>
+              <li>People who value quiet, low-power, always-on hardware.</li>
+              <li>People who want a clear Raspberry Pi path rather than an x86 build.</li>
+              <li>People who want a canonical starting point that will grow with the docs.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">What this page will eventually contain</h2>
+        <div class="card-grid card-grid--two">
+          <article class="card">
+            <h3 class="card__title">Build and setup materials</h3>
+            <div class="card__body">
+              <ul class="bullet-list">
+                <li>Hardware bill of materials</li>
+                <li>Assembly steps</li>
+                <li>Install and provision steps</li>
+                <li>Software and app setup</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card">
+            <h3 class="card__title">Support materials</h3>
+            <div class="card__body">
+              <ul class="bullet-list">
+                <li>Troubleshooting</li>
+                <li>Photos</li>
+                <li>Video walkthrough</li>
+                <li>Path-specific discussion thread</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">Video walkthrough</h2>
+        <article class="card">
+          <h3 class="card__title">Coming soon</h3>
+          <div class="card__body">
+            <!-- TODO: add canonical video when ready -->
+            <p>
+              Video walkthrough coming soon. This page is the canonical landing surface for that
+              future video.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">Canonical docs</h2>
+        <article class="card">
+          <h3 class="card__title">Living technical record</h3>
+          <div class="card__body">
+            <p>
+              The GitHub docs are the living technical record while this public page is still being
+              filled in.
+            </p>
+          </div>
+          <div class="site-actions">
+            <a class="button" href={matchboxDocsUrl}>Open Matchbox docs on GitHub</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="section-block">
+        <h2 class="section-block__title">Future discussion</h2>
+        <article class="card">
+          <div class="card__body">
+            <!-- TODO: add Discourse link when forum is live -->
+            <p>Path-specific discussion will live here when the forum is ready.</p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <SiteFooter
+      description="Matchbox is the canonical Raspberry Pi path page for this phase."
+      links={[
+        { href: "/ourbox/", label: "Back to OurBox" },
+        { href: "/woodbox/", label: "Compare Woodbox" },
+        { href: matchboxDocsUrl, label: "Open GitHub docs", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>

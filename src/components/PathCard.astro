@@ -1,0 +1,36 @@
+---
+import type { OurBoxPath } from "../data/ourbox-paths";
+
+interface Props {
+  href: OurBoxPath["href"];
+  title: OurBoxPath["title"];
+  summary: OurBoxPath["summary"];
+  platform: OurBoxPath["platform"];
+  status: OurBoxPath["status"];
+  ctaLabel?: string;
+}
+
+const {
+  href,
+  title,
+  summary,
+  platform,
+  status,
+  ctaLabel = "Open path",
+} = Astro.props;
+---
+
+<article class="card path-card">
+  <p class="collection-card__eyebrow">{platform}</p>
+  <h2 class="card__title">{title}</h2>
+  <div class="card__body">
+    <p>{summary}</p>
+    <ul class="collection-card__meta">
+      <li>{platform}</li>
+      <li>{status}</li>
+    </ul>
+  </div>
+  <div class="site-actions">
+    <a class="button" href={href}>{ctaLabel}</a>
+  </div>
+</article>

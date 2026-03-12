@@ -1,6 +1,8 @@
 ---
+import PathCard from "../components/PathCard.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteNav from "../components/SiteNav.astro";
+import { ourBoxPaths } from "../data/ourbox-paths";
 import { site } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
@@ -19,10 +21,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           outright.
         </p>
         <div class="site-actions">
-          <a class="button" href="#mission">Mission &amp; Vision</a>
-          <a class="button button--secondary" href="#governance">Governance Model</a>
-          <a class="button button--secondary" href="/ourbox/">Explore OurBox</a>
+          <a class="button" href="/ourbox/">Choose an OurBox path</a>
+          <a class="button button--secondary" href="/matchbox/">Explore Matchbox</a>
+          <a class="button button--secondary" href="/woodbox/">Explore Woodbox</a>
           <a class="button button--secondary" href={site.githubOrgUrl}>View our public GitHub</a>
+        </div>
+        <p class="note-row">The primary public path is one umbrella page and two real box pages.</p>
+      </section>
+
+      <section class="section-block" id="paths">
+        <h2 class="section-block__title">Choose a path</h2>
+        <p class="section-block__lede">
+          There are two practical public OurBox paths right now. Choose the Raspberry Pi path or the
+          x86 path, then use the model page as your canonical landing surface.
+        </p>
+        <div class="card-grid card-grid--two">
+          {ourBoxPaths.map((path) => <PathCard {...path} ctaLabel={`Open ${path.title}`} />)}
         </div>
       </section>
 
