@@ -6,20 +6,38 @@ How to upload video files to the `too-media` R2 bucket for first-party delivery 
 See [ADR-0001](../decisions/ADR-0001-use-cloudflare-r2-and-cdn-for-first-party-video-delivery.md) for
 the architectural decision behind this setup.
 
+## Credentials
+
+All Cloudflare credentials for this workflow are stored on **centroid** at:
+
+```
+/home/johnb/cloudflare token.txt
+```
+
+The file contains:
+
+| Key | Used for |
+|-----|----------|
+| `access key ID` | rclone R2 remote (`too-media`) |
+| `secret access key` | rclone R2 remote (`too-media`) |
+| `account id` | rclone endpoint URL |
+| `s3 api` | rclone endpoint URL |
+| `token value` | General Cloudflare API token (R2 scope) |
+| `cache purge token` | Cloudflare Cache Purge API |
+| `zone id (techofourown.com)` | Cache purge API calls |
+
+Do not commit credential values to this repository.
+
 ## Prerequisites
 
-- **rclone** installed (`apt install rclone`)
-- **R2 API credentials** (S3-compatible): Access Key ID, Secret Access Key, Account ID
-- **R2 bucket** (`too-media`) with:
-  - Custom domain connected (`media.techofourown.com`)
-  - Public Development URL enabled
-
-R2 API credentials are created in the Cloudflare dashboard under R2 → Manage R2 API Tokens. These are
-separate from Cloudflare API tokens used for DNS or Terraform.
+- **rclone** installed (`apt install rclone`) — already configured on centroid
+- **ffmpeg** installed (`apt install ffmpeg`) — for converting non-MP4 source files
+- **R2 bucket** (`too-media`) with custom domain (`media.techofourown.com`) connected
 
 ## Configure rclone
 
-Create an rclone remote named `too-media`:
+The `too-media` rclone remote is already configured on centroid. On a new machine, set it up
+using the credentials from centroid:
 
 ```bash
 rclone config create too-media s3 \
@@ -37,6 +55,34 @@ rclone lsd too-media:
 ```
 
 You should see the `too-media` bucket in the output.
+
+## Convert source video to MP4
+
+Videos must be MP4 (H.264) before uploading. If your source file is a different format
+(e.g. `.webm`, `.mov`, `.mkv`), convert it first:
+
+```bash
+ffmpeg -i <SOURCE_FILE> \
+  -c:v libx264 -crf 23 -preset medium -pix_fmt yuv420p \
+  <OUTPUT_FILE>.mp4
+```
+
+If the source has no audio track, add `-an` to skip audio encoding:
+
+```bash
+ffmpeg -i <SOURCE_FILE> \
+  -c:v libx264 -crf 23 -preset medium -pix_fmt yuv420p \
+  -an \
+  <OUTPUT_FILE>.mp4
+```
+
+If the source is already H.264 MP4, no conversion is needed — upload it directly.
+
+Verify the output before uploading:
+
+```bash
+ffprobe <OUTPUT_FILE>.mp4
+```
 
 ## Upload a video
 
@@ -56,17 +102,17 @@ rclone copyto \
 
 ### Example
 
-Uploading a 747 MB video to the `videos/` directory:
+Uploading a 115 MB video to the `videos/` directory:
 
 ```bash
 rclone copyto \
-  woodbox_demo_parts_procurement_v1.mp4 \
-  too-media:too-media/videos/woodbox_demo_parts_procurement_v1.mp4 \
+  democracy_ai_vision.mp4 \
+  too-media:too-media/videos/democracy_ai_vision.mp4 \
   --s3-upload-concurrency 16 \
   --s3-chunk-size 64M \
   --progress \
   --header "Content-Type: video/mp4" \
-  --header "Content-Disposition: inline; filename=\"woodbox_demo_parts_procurement_v1.mp4\"" \
+  --header "Content-Disposition: inline; filename=\"democracy_ai_vision.mp4\"" \
   --header "Cache-Control: public, max-age=31536000, immutable"
 ```
 
@@ -97,7 +143,7 @@ rclone ls too-media:too-media/videos/
 Check the file is accessible and has correct headers:
 
 ```bash
-curl -I https://media.techofourown.com/videos/woodbox_demo_parts_procurement_v1.mp4
+curl -I https://media.techofourown.com/videos/<FILENAME>.mp4
 ```
 
 Expected response:
@@ -105,9 +151,57 @@ Expected response:
 ```
 HTTP/2 200
 content-type: video/mp4
-content-disposition: inline; filename="woodbox_demo_parts_procurement_v1.mp4"
+content-disposition: inline; filename="<FILENAME>.mp4"
 cache-control: public, max-age=31536000, immutable
 ```
+
+## Replacing a video
+
+Because videos are cached with `Cache-Control: immutable`, replacing a file in R2 is not enough
+on its own — the old version may remain cached at Cloudflare edge nodes. You must also purge
+the cache.
+
+### Step 1 — Upload the replacement
+
+Upload the new file to the **same bucket path** as the original:
+
+```bash
+rclone copyto \
+  <NEW_FILE>.mp4 \
+  too-media:too-media/videos/<FILENAME>.mp4 \
+  --s3-upload-concurrency 16 \
+  --s3-chunk-size 64M \
+  --progress \
+  --header "Content-Type: video/mp4" \
+  --header "Content-Disposition: inline; filename=\"<FILENAME>.mp4\"" \
+  --header "Cache-Control: public, max-age=31536000, immutable"
+```
+
+### Step 2 — Purge the cache
+
+Use the cache purge token from centroid's credentials file:
+
+```bash
+curl -X POST "https://api.cloudflare.com/client/v4/zones/28d253589f420799fba7af3db433b470/purge_cache" \
+  -H "Authorization: Bearer <CACHE_PURGE_TOKEN>" \
+  -H "Content-Type: application/json" \
+  --data '{"files":["https://media.techofourown.com/videos/<FILENAME>.mp4"]}'
+```
+
+A successful response looks like:
+
+```json
+{"success": true, "errors": [], "messages": [], "result": {"id": "28d253589f420799fba7af3db433b470"}}
+```
+
+### Step 3 — Verify
+
+```bash
+curl -I https://media.techofourown.com/videos/<FILENAME>.mp4
+```
+
+Confirm `content-length` matches the new file size. The `cf-cache-status` header will show
+`DYNAMIC` or `MISS` immediately after a purge, indicating the edge is serving fresh from R2.
 
 ## Bucket path conventions
 
