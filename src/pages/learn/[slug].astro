@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import VideoPlayer from "../../components/VideoPlayer.astro";
+import { defaultVideoAspect } from "../../data/media";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 
 export async function getStaticPaths() {
@@ -25,6 +26,13 @@ const robots = entry.data.noindex ? "noindex,nofollow" : undefined;
   robots={robots}
   referrer={entry.data.referrer}
 >
-  {entry.data.videoUrl && <VideoPlayer title={entry.data.title} videoUrl={entry.data.videoUrl} runtime={entry.data.runtime} />}
+  {entry.data.videoUrl && (
+    <VideoPlayer
+      title={entry.data.title}
+      videoUrl={entry.data.videoUrl}
+      runtime={entry.data.runtime}
+      aspect={entry.data.videoAspect ?? defaultVideoAspect}
+    />
+  )}
   <Content />
 </ContentLayout>

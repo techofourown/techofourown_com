@@ -79,6 +79,22 @@ House standard:
 - all critical text and logos must stay inside a padded safe area
 - do not use a screenshot with tiny UI text as a share image
 
+## Video aspect metadata
+
+Use explicit `videoAspect` for every published video entry.
+
+- `landscape` - standard 16:9 or other wide video meant to read as wide media
+- `portrait` - 9:16 or phone-first vertical video
+- `square` - 1:1 video
+
+House widths:
+
+- landscape: 900px max
+- portrait: 460px max
+- square: 640px max
+
+Never let portrait or square video fall back to landscape framing on the detail page.
+
 ## House aspect-ratio rules
 
 ### Preferred `cardImage` ratios

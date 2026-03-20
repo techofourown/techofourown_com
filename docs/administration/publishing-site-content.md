@@ -22,7 +22,7 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    - `draft`
    - `order` or `publishedAt`
    - `runtime` (optional)
-   - `videoUrl` when a video exists
+   - `videoUrl` and explicit `videoAspect` when a video exists
    - `noindex` and `referrer` for non-indexed walkthroughs
 3. Write the body in Markdown.
 4. Run `npm run check && npm run build`.
@@ -38,7 +38,7 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    - `order` or `publishedAt`
    - `difficulty`
    - `estimatedTime` (optional)
-   - `videoUrl` when a video exists
+   - `videoUrl` and explicit `videoAspect` when a video exists
    - `noindex` and `referrer` for non-indexed walkthroughs
 3. Run `npm run check && npm run build`.
 4. Verify the page at `/build/<slug>/`.
@@ -61,7 +61,7 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    - `coverImage`, `coverImageAlt`, and explicit `coverImagePresentation`
    - `cardImage`, `cardImageAlt`, and explicit `cardImageFit`
    - `shareImage` and `shareImageAlt`
-3. If the entry has video, include `videoUrl` and `videoAspect` when needed.
+3. If the entry has video, include `videoUrl` and explicit `videoAspect`.
 4. Follow the media-role rules in
    `docs/administration/drumbeat-media-guidelines.md`.
 5. Install the media checker dependencies once with

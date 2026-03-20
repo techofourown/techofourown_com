@@ -7,6 +7,7 @@ order: 1
 publishedAt: 2026-03-11
 runtime: "~45 minutes"
 videoUrl: "https://media.techofourown.com/videos/matchbox_demo.mp4"
+videoAspect: "landscape"
 noindex: true
 referrer: "no-referrer"
 ---

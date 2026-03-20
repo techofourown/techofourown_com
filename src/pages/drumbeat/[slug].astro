@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import RelatedLinkCard from "../../components/RelatedLinkCard.astro";
 import VideoPlayer from "../../components/VideoPlayer.astro";
+import { defaultVideoAspect } from "../../data/media";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" });
@@ -43,7 +44,7 @@ const metaItems = [
           title={entry.data.title}
           videoUrl={entry.data.videoUrl}
           poster={entry.data.coverImage.src}
-          aspect={entry.data.videoAspect ?? "landscape"}
+          aspect={entry.data.videoAspect ?? defaultVideoAspect}
         />
       ) : entry.data.audioUrl ? (
         <section class="drumbeat-media drumbeat-media--audio">

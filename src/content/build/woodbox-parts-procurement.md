@@ -8,6 +8,7 @@ publishedAt: 2026-03-11
 difficulty: "medium"
 estimatedTime: "Reference walkthrough"
 videoUrl: "https://media.techofourown.com/videos/woodbox_demo_parts_procurement_v1.mp4"
+videoAspect: "landscape"
 noindex: true
 referrer: "no-referrer"
 ---

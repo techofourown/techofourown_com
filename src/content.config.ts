@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { videoAspectValues } from "./data/media";
 
 const learn = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/learn" }),
@@ -13,6 +14,7 @@ const learn = defineCollection({
     publishedAt: z.coerce.date().optional(),
     runtime: z.string().optional(),
     videoUrl: z.url().optional(),
+    videoAspect: z.enum(videoAspectValues).optional(),
     noindex: z.boolean().default(false),
     referrer: z.string().optional(),
   }),
@@ -31,6 +33,7 @@ const build = defineCollection({
     estimatedTime: z.string().optional(),
     runtime: z.string().optional(),
     videoUrl: z.url().optional(),
+    videoAspect: z.enum(videoAspectValues).optional(),
     noindex: z.boolean().default(false),
     referrer: z.string().optional(),
   }),
@@ -122,7 +125,7 @@ const drumbeat = defineCollection({
       shareImageAlt: z.string().optional(),
       videoUrl: z.url().optional(),
       audioUrl: z.url().optional(),
-      videoAspect: z.enum(["landscape", "portrait"]).optional(),
+      videoAspect: z.enum(videoAspectValues).optional(),
       mirrors: z
         .array(
           z.object({

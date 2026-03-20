@@ -1,3 +1,5 @@
+import type { VideoAspect } from "./media";
+
 export type OurBoxPath = {
   key: "matchbox" | "woodbox";
   title: string;
@@ -7,6 +9,7 @@ export type OurBoxPath = {
   status: string;
   docsUrl?: string;
   videoUrl?: string;
+  videoAspect?: VideoAspect;
   discussionUrl?: string;
 };
 
@@ -20,6 +23,7 @@ export const ourBoxPaths: OurBoxPath[] = [
     status: "Foundational page",
     docsUrl: "https://github.com/techofourown/pf-ourbox/tree/main/hw/matchbox",
     videoUrl: "https://media.techofourown.com/videos/matchbox_demo.mp4",
+    videoAspect: "landscape",
   },
   {
     key: "woodbox",

@@ -1,11 +1,14 @@
 ---
+import { defaultVideoAspect } from "../data/media";
+import type { VideoAspect } from "../data/media";
+
 interface Props {
   title: string;
   videoUrl: string;
   runtime?: string;
   difficulty?: string;
   poster?: string;
-  aspect?: "landscape" | "portrait";
+  aspect?: VideoAspect;
 }
 
 const {
@@ -14,7 +17,7 @@ const {
   runtime,
   difficulty,
   poster,
-  aspect = "landscape",
+  aspect = defaultVideoAspect,
 } = Astro.props;
 const metadata = [
   ...(runtime ? [{ label: "Runtime", value: runtime }] : []),
@@ -25,8 +28,9 @@ const metadata = [
 <section
   class:list={{
     "video-player": true,
+    "video-player--landscape": aspect === "landscape",
     "video-player--portrait": aspect === "portrait",
-    "video-player--landscape": aspect !== "portrait",
+    "video-player--square": aspect === "square",
   }}
 >
   {metadata.length > 0 && (
