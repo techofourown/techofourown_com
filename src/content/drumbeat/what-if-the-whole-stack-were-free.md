@@ -7,6 +7,11 @@ publishedAt: 2026-03-17
 format: "video"
 coverImage: "./media/what-if-the-whole-stack-were-free-cover.jpg"
 coverImageAlt: "Poster frame showing the OurBox dashboard on a phone, with Files, Notes, and Todo apps visible against a blurred dark background."
+cardImage: "./media/what-if-the-whole-stack-were-free-card.jpg"
+cardImageAlt: "Landscape card poster showing the OurBox dashboard on a phone centered over a blurred dark background."
+cardImageFit: "cover"
+shareImage: "./media/what-if-the-whole-stack-were-free-share.jpg"
+shareImageAlt: "Share image for What if the whole stack were free?"
 videoUrl: "https://media.techofourown.com/videos/quickdemo.mp4"
 videoAspect: "portrait"
 mirrors: []

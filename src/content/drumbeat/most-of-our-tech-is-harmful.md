@@ -7,6 +7,11 @@ publishedAt: 2026-03-20
 format: "image"
 coverImage: "./media/most-of-our-tech-is-harmful-cover.png"
 coverImageAlt: "Illustration of a small robot popping out of a wooden bucket of bright green slime held by a human hand."
+cardImage: "./media/most-of-our-tech-is-harmful-card.png"
+cardImageAlt: "Landscape card image showing the robot and green slime bursting from a wooden bucket against a blurred background."
+cardImageFit: "cover"
+shareImage: "./media/most-of-our-tech-is-harmful-share.png"
+shareImageAlt: "Share image for Most of our tech is harmful."
 mirrors: []
 links: []
 ---

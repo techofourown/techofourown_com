@@ -7,6 +7,11 @@ publishedAt: 2026-03-18
 format: "image"
 coverImage: "./media/vice-is-profitable-cover.png"
 coverImageAlt: "Illustration of a woman staring at a glowing smartphone face-to-face with a deep-sea anglerfish whose lure plugs into the phone."
+cardImage: "./media/vice-is-profitable-cover.png"
+cardImageAlt: "Illustration of a woman staring at a glowing smartphone face-to-face with a deep-sea anglerfish whose lure plugs into the phone."
+cardImageFit: "cover"
+shareImage: "./media/vice-is-profitable-share.png"
+shareImageAlt: "Share image for Vice is profitable."
 mirrors: []
 links: []
 ---

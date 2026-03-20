@@ -16,6 +16,8 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const publishedDate = dateFormatter.format(entry.data.publishedAt);
+const shareImage = entry.data.shareImage ?? entry.data.coverImage;
+const shareImageAlt = entry.data.shareImageAlt ?? entry.data.coverImageAlt;
 const metaItems = [
   { label: "Published", value: publishedDate },
   { label: "Format", value: formatLabel(entry.data.format) },
@@ -28,8 +30,8 @@ const metaItems = [
   description={entry.data.description}
   eyebrow="Drumbeat"
   metaItems={metaItems}
-  ogImage={entry.data.coverImage.src}
-  ogImageAlt={entry.data.coverImageAlt}
+  ogImage={shareImage.src}
+  ogImageAlt={shareImageAlt}
   ogType="article"
   publishedTime={entry.data.publishedAt.toISOString()}
 >

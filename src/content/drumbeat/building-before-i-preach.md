@@ -7,6 +7,11 @@ publishedAt: 2026-03-06
 format: "text"
 coverImage: "./media/building-before-i-preach-cover.png"
 coverImageAlt: "Branded title card reading Building before I preach with the line The work has to be built before it can be shown."
+cardImage: "./media/building-before-i-preach-card.png"
+cardImageAlt: "Branded card image reading Building before I preach with the line The work has to be built before it can be shown."
+cardImageFit: "contain"
+shareImage: "./media/building-before-i-preach-share.png"
+shareImageAlt: "Share image for Building before I preach."
 mirrors: []
 links:
   - label: "Related reading"

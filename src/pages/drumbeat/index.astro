@@ -41,8 +41,10 @@ const entries = (await getCollection("drumbeat", ({ data }) => !data.draft)).sor
                 description={entry.data.summary ?? entry.data.description}
                 publishedAt={dateFormatter.format(entry.data.publishedAt)}
                 format={formatLabel(entry.data.format)}
-                coverImage={entry.data.coverImage}
-                coverImageAlt={entry.data.coverImageAlt}
+                cardImage={entry.data.cardImage ?? entry.data.coverImage}
+                cardImageAlt={entry.data.cardImageAlt ?? entry.data.coverImageAlt}
+                cardImageFit={entry.data.cardImageFit}
+                cardImagePosition={entry.data.cardImagePosition}
                 featured={index === 0}
               />
             ))}

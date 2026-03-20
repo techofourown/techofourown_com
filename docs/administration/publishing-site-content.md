@@ -50,6 +50,25 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
 3. Run `npm run check && npm run build`.
 4. Verify the entry at `/journal/<slug>/` and in `/journal/`.
 
+## Add a Drumbeat entry
+1. Create a Markdown file in `src/content/drumbeat/`.
+2. Include the required frontmatter for:
+   - `title`
+   - `description`
+   - `draft`
+   - `publishedAt`
+   - `format`
+   - `coverImage` and `coverImageAlt`
+   - `cardImage`, `cardImageAlt`, and explicit `cardImageFit`
+   - `shareImage` and `shareImageAlt`
+3. If the entry has video, include `videoUrl` and `videoAspect` when needed.
+4. Follow the media-role rules in
+   `docs/administration/drumbeat-media-guidelines.md`.
+5. Install the media checker dependencies once with
+   `python3 -m pip install -r tools/requirements-media-check.txt`.
+6. Run `npm run check && npm run check:media && npm run build`.
+7. Verify the entry on `/`, `/drumbeat/`, and `/drumbeat/<slug>/`.
+
 ## Add a philosophy entry
 1. Create a Markdown file in `src/content/philosophy/`.
 2. Include `title`, `description`, `summary` (optional), `draft`, `order`

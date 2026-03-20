@@ -1,5 +1,5 @@
 ---
-type CoverImage = {
+type MediaImage = {
   src: string;
   width: number;
   height: number;
@@ -11,8 +11,10 @@ interface Props {
   description: string;
   publishedAt: string;
   format: string;
-  coverImage: CoverImage;
-  coverImageAlt: string;
+  cardImage: MediaImage;
+  cardImageAlt: string;
+  cardImageFit?: "cover" | "contain";
+  cardImagePosition?: string;
   featured?: boolean;
 }
 
@@ -22,8 +24,10 @@ const {
   description,
   publishedAt,
   format,
-  coverImage,
-  coverImageAlt,
+  cardImage,
+  cardImageAlt,
+  cardImageFit = "cover",
+  cardImagePosition,
   featured = false,
 } = Astro.props;
 ---
@@ -33,19 +37,23 @@ const {
     card: true,
     "drumbeat-card": true,
     "drumbeat-card--featured": featured,
+    "drumbeat-card--cover": cardImageFit === "cover",
+    "drumbeat-card--contain": cardImageFit === "contain",
   }}
 >
   <a class="drumbeat-card__link" href={href}>
-    <div class="drumbeat-card__media">
+    <div class="drumbeat-card__media" style={`--media-position: ${cardImagePosition ?? "center"};`}>
       <span class="drumbeat-card__format">{format}</span>
-      <img
-        src={coverImage.src}
-        width={coverImage.width}
-        height={coverImage.height}
-        alt={coverImageAlt}
-        loading="lazy"
-        decoding="async"
-      />
+      <div class="drumbeat-card__media-frame">
+        <img
+          src={cardImage.src}
+          width={cardImage.width}
+          height={cardImage.height}
+          alt={cardImageAlt}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
     </div>
 
     <div class="drumbeat-card__content">

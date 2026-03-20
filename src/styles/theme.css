@@ -469,22 +469,51 @@ a {
 
 .drumbeat-card__media {
   position: relative;
+  overflow: hidden;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.02));
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.06), rgba(15, 23, 42, 0.02));
+  aspect-ratio: var(--drumbeat-card-media-ratio, 4 / 3);
 }
 
-.drumbeat-card--featured .drumbeat-card__media {
-  aspect-ratio: 16 / 10;
+.drumbeat-card__media-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.drumbeat-card:not(.drumbeat-card--featured) .drumbeat-card__media {
-  aspect-ratio: 4 / 3;
+.drumbeat-card--featured {
+  --drumbeat-card-media-ratio: 16 / 10;
 }
 
-.drumbeat-card__media img {
+.drumbeat-card--cover:not(.drumbeat-card--featured) {
+  --drumbeat-card-media-ratio: 4 / 3;
+}
+
+.drumbeat-card--contain:not(.drumbeat-card--featured) {
+  --drumbeat-card-media-ratio: 16 / 10;
+}
+
+.drumbeat-card--cover .drumbeat-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: var(--media-position, center);
+}
+
+.drumbeat-card--contain .drumbeat-card__media {
+  background: linear-gradient(180deg, #f7f9fc, #eef3f8);
+}
+
+.drumbeat-card--contain .drumbeat-card__media-frame {
+  padding: clamp(12px, 2vw, 18px);
+}
+
+.drumbeat-card--contain .drumbeat-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -492,7 +521,7 @@ a {
   position: absolute;
   top: 16px;
   left: 16px;
-  z-index: 1;
+  z-index: 2;
   padding: 7px 11px;
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.74);
@@ -791,9 +820,10 @@ a {
     padding: 20px;
   }
 
-  .drumbeat-card--featured .drumbeat-card__media,
-  .drumbeat-card:not(.drumbeat-card--featured) .drumbeat-card__media {
-    aspect-ratio: 4 / 3;
+  .drumbeat-card--featured,
+  .drumbeat-card--cover:not(.drumbeat-card--featured),
+  .drumbeat-card--contain:not(.drumbeat-card--featured) {
+    --drumbeat-card-media-ratio: 4 / 3;
   }
 
   .video-player--portrait .video-player__frame video {

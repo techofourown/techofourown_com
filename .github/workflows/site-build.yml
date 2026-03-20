@@ -18,11 +18,30 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
       - name: Install dependencies
         run: npm ci
 
+      - name: Install media-check dependencies
+        run: python3 -m pip install -r tools/requirements-media-check.txt
+
       - name: Check site
         run: npm run check
+
+      - name: Check Drumbeat media
+        run: npm run check:media
+
+      - name: Upload Drumbeat media report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drumbeat-media-report
+          path: /tmp/drumbeat-media-report
+          if-no-files-found: error
 
       - name: Build site
         run: npm run build

@@ -7,6 +7,11 @@ publishedAt: 2026-03-07
 format: "image"
 coverImage: "./media/apps-suck-generally-cover.jpeg"
 coverImageAlt: "Black OurBox device and a smartphone showing a dark to-do app dashboard on a blue tabletop."
+cardImage: "./media/apps-suck-generally-card.png"
+cardImageAlt: "Landscape card image showing the OurBox device and a smartphone screen inside a framed photo against a blurred background."
+cardImageFit: "cover"
+shareImage: "./media/apps-suck-generally-share.png"
+shareImageAlt: "Share image for Apps suck. Generally."
 mirrors: []
 links: []
 ---

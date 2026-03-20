@@ -53,8 +53,10 @@ const latestDrumbeat = (await getCollection("drumbeat", ({ data }) => !data.draf
                 description={latestDrumbeat[0].data.summary ?? latestDrumbeat[0].data.description}
                 publishedAt={dateFormatter.format(latestDrumbeat[0].data.publishedAt)}
                 format={formatLabel(latestDrumbeat[0].data.format)}
-                coverImage={latestDrumbeat[0].data.coverImage}
-                coverImageAlt={latestDrumbeat[0].data.coverImageAlt}
+                cardImage={latestDrumbeat[0].data.cardImage ?? latestDrumbeat[0].data.coverImage}
+                cardImageAlt={latestDrumbeat[0].data.cardImageAlt ?? latestDrumbeat[0].data.coverImageAlt}
+                cardImageFit={latestDrumbeat[0].data.cardImageFit}
+                cardImagePosition={latestDrumbeat[0].data.cardImagePosition}
                 featured={true}
               />
 
@@ -66,8 +68,10 @@ const latestDrumbeat = (await getCollection("drumbeat", ({ data }) => !data.draf
                     description={entry.data.summary ?? entry.data.description}
                     publishedAt={dateFormatter.format(entry.data.publishedAt)}
                     format={formatLabel(entry.data.format)}
-                    coverImage={entry.data.coverImage}
-                    coverImageAlt={entry.data.coverImageAlt}
+                    cardImage={entry.data.cardImage ?? entry.data.coverImage}
+                    cardImageAlt={entry.data.cardImageAlt ?? entry.data.coverImageAlt}
+                    cardImageFit={entry.data.cardImageFit}
+                    cardImagePosition={entry.data.cardImagePosition}
                   />
                 ))}
               </div>

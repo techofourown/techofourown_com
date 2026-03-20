@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "check:media": "python3 tools/check_drumbeat_media.py --strict --report-dir /tmp/drumbeat-media-report",
     "astro": "astro"
   },
   "dependencies": {
