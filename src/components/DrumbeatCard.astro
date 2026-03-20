@@ -13,33 +13,46 @@ interface Props {
   format: string;
   coverImage: CoverImage;
   coverImageAlt: string;
+  featured?: boolean;
 }
 
-const { href, title, description, publishedAt, format, coverImage, coverImageAlt } = Astro.props;
+const {
+  href,
+  title,
+  description,
+  publishedAt,
+  format,
+  coverImage,
+  coverImageAlt,
+  featured = false,
+} = Astro.props;
 ---
 
-<article class="card drumbeat-card">
-  <a class="drumbeat-card__media" href={href}>
-    <img
-      src={coverImage.src}
-      width={coverImage.width}
-      height={coverImage.height}
-      alt={coverImageAlt}
-      loading="lazy"
-      decoding="async"
-    />
-  </a>
-
-  <div class="drumbeat-card__content">
-    <div class="drumbeat-card__meta">
-      <span>{publishedAt}</span>
-      <span class="drumbeat-card__badge">{format}</span>
+<article
+  class:list={{
+    card: true,
+    "drumbeat-card": true,
+    "drumbeat-card--featured": featured,
+  }}
+>
+  <a class="drumbeat-card__link" href={href}>
+    <div class="drumbeat-card__media">
+      <span class="drumbeat-card__format">{format}</span>
+      <img
+        src={coverImage.src}
+        width={coverImage.width}
+        height={coverImage.height}
+        alt={coverImageAlt}
+        loading="lazy"
+        decoding="async"
+      />
     </div>
 
-    <h2 class="card__title">
-      <a href={href}>{title}</a>
-    </h2>
-
-    <p class="drumbeat-card__summary">{description}</p>
-  </div>
+    <div class="drumbeat-card__content">
+      <p class="drumbeat-card__meta">{publishedAt}</p>
+      <h2 class="drumbeat-card__title">{title}</h2>
+      <p class="drumbeat-card__summary">{description}</p>
+      <span class="drumbeat-card__cta">Read entry →</span>
+    </div>
+  </a>
 </article>

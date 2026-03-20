@@ -40,6 +40,7 @@ const metaItems = [
           title={entry.data.title}
           videoUrl={entry.data.videoUrl}
           poster={entry.data.coverImage.src}
+          aspect={entry.data.videoAspect ?? "landscape"}
         />
       ) : entry.data.audioUrl ? (
         <section class="drumbeat-media drumbeat-media--audio">

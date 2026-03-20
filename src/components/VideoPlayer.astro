@@ -5,16 +5,30 @@ interface Props {
   runtime?: string;
   difficulty?: string;
   poster?: string;
+  aspect?: "landscape" | "portrait";
 }
 
-const { title, videoUrl, runtime, difficulty, poster } = Astro.props;
+const {
+  title,
+  videoUrl,
+  runtime,
+  difficulty,
+  poster,
+  aspect = "landscape",
+} = Astro.props;
 const metadata = [
   ...(runtime ? [{ label: "Runtime", value: runtime }] : []),
   ...(difficulty ? [{ label: "Difficulty", value: difficulty }] : []),
 ];
 ---
 
-<section class="video-player">
+<section
+  class:list={{
+    "video-player": true,
+    "video-player--portrait": aspect === "portrait",
+    "video-player--landscape": aspect !== "portrait",
+  }}
+>
   {metadata.length > 0 && (
     <dl class="content-layout__meta">
       {metadata.map((item) => (

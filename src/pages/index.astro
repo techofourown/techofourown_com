@@ -46,18 +46,31 @@ const latestDrumbeat = (await getCollection("drumbeat", ({ data }) => !data.draf
         </p>
         {
           latestDrumbeat.length > 0 ? (
-            <div class="card-grid card-grid--three">
-              {latestDrumbeat.map((entry) => (
-                <DrumbeatCard
-                  href={`/drumbeat/${entry.id}/`}
-                  title={entry.data.title}
-                  description={entry.data.summary ?? entry.data.description}
-                  publishedAt={dateFormatter.format(entry.data.publishedAt)}
-                  format={formatLabel(entry.data.format)}
-                  coverImage={entry.data.coverImage}
-                  coverImageAlt={entry.data.coverImageAlt}
-                />
-              ))}
+            <div class="drumbeat-home-grid">
+              <DrumbeatCard
+                href={`/drumbeat/${latestDrumbeat[0].id}/`}
+                title={latestDrumbeat[0].data.title}
+                description={latestDrumbeat[0].data.summary ?? latestDrumbeat[0].data.description}
+                publishedAt={dateFormatter.format(latestDrumbeat[0].data.publishedAt)}
+                format={formatLabel(latestDrumbeat[0].data.format)}
+                coverImage={latestDrumbeat[0].data.coverImage}
+                coverImageAlt={latestDrumbeat[0].data.coverImageAlt}
+                featured={true}
+              />
+
+              <div class="drumbeat-home-grid__side">
+                {latestDrumbeat.slice(1).map((entry) => (
+                  <DrumbeatCard
+                    href={`/drumbeat/${entry.id}/`}
+                    title={entry.data.title}
+                    description={entry.data.summary ?? entry.data.description}
+                    publishedAt={dateFormatter.format(entry.data.publishedAt)}
+                    format={formatLabel(entry.data.format)}
+                    coverImage={entry.data.coverImage}
+                    coverImageAlt={entry.data.coverImageAlt}
+                  />
+                ))}
+              </div>
             </div>
           ) : (
             <div class="empty-state">No Drumbeat entries yet.</div>

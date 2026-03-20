@@ -115,6 +115,7 @@ const drumbeat = defineCollection({
       coverImageAlt: z.string(),
       videoUrl: z.url().optional(),
       audioUrl: z.url().optional(),
+      videoAspect: z.enum(["landscape", "portrait"]).optional(),
       mirrors: z
         .array(
           z.object({

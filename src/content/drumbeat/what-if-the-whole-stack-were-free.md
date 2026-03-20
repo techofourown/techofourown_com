@@ -8,6 +8,7 @@ format: "video"
 coverImage: "./media/what-if-the-whole-stack-were-free-cover.jpg"
 coverImageAlt: "Poster frame showing the OurBox dashboard on a phone, with Files, Notes, and Todo apps visible against a blurred dark background."
 videoUrl: "https://media.techofourown.com/videos/quickdemo.mp4"
+videoAspect: "portrait"
 mirrors: []
 links: []
 ---

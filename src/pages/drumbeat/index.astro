@@ -33,8 +33,8 @@ const entries = (await getCollection("drumbeat", ({ data }) => !data.draft)).sor
 
       {
         entries.length > 0 ? (
-          <section class="collection-grid">
-            {entries.map((entry) => (
+          <section class="drumbeat-feed">
+            {entries.map((entry, index) => (
               <DrumbeatCard
                 href={`/drumbeat/${entry.id}/`}
                 title={entry.data.title}
@@ -43,6 +43,7 @@ const entries = (await getCollection("drumbeat", ({ data }) => !data.draft)).sor
                 format={formatLabel(entry.data.format)}
                 coverImage={entry.data.coverImage}
                 coverImageAlt={entry.data.coverImageAlt}
+                featured={index === 0}
               />
             ))}
           </section>
