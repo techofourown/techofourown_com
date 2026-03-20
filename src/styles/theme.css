@@ -420,6 +420,52 @@ a {
   font-size: 0.88rem;
 }
 
+.drumbeat-card {
+  padding: 0;
+  overflow: hidden;
+  gap: 0;
+}
+
+.drumbeat-card__media {
+  display: block;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-alt);
+}
+
+.drumbeat-card__media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.drumbeat-card__content {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.drumbeat-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.drumbeat-card__badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: var(--accent-dark);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.drumbeat-card__summary {
+  color: var(--muted);
+}
+
 .empty-state {
   padding: 28px;
   border-radius: var(--radius-card);
@@ -456,6 +502,87 @@ a {
   text-decoration: underline;
 }
 
+.drumbeat-detail {
+  display: grid;
+  gap: 24px;
+}
+
+.drumbeat-detail__body {
+  display: grid;
+  gap: 16px;
+}
+
+.drumbeat-media {
+  display: grid;
+  gap: 12px;
+}
+
+.drumbeat-media img,
+.drumbeat-media audio {
+  width: 100%;
+}
+
+.drumbeat-media img {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.drumbeat-media--audio {
+  padding: 24px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.drumbeat-detail__section {
+  display: grid;
+  gap: 16px;
+}
+
+.drumbeat-detail__title {
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.related-link-card {
+  height: 100%;
+}
+
+.related-link-card__source {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.related-link-card__link {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.mirror-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mirror-link {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--accent-dark);
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
+
+.drumbeat-card a,
+.related-link-card a,
+.mirror-link-row a {
+  text-decoration: none;
+}
+
 .prose h2,
 .prose h3,
 .prose h4 {
@@ -490,6 +617,11 @@ a {
 .prose a {
   color: var(--accent-dark);
   text-decoration: underline;
+}
+
+.prose .related-link-card a,
+.prose .mirror-link-row a {
+  text-decoration: none;
 }
 
 .prose blockquote {
@@ -536,7 +668,8 @@ a {
   }
 
   .content-layout__meta,
-  .collection-card__meta {
+  .collection-card__meta,
+  .drumbeat-card__meta {
     flex-direction: column;
     align-items: flex-start;
   }

@@ -1,0 +1,45 @@
+---
+type CoverImage = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  format: string;
+  coverImage: CoverImage;
+  coverImageAlt: string;
+}
+
+const { href, title, description, publishedAt, format, coverImage, coverImageAlt } = Astro.props;
+---
+
+<article class="card drumbeat-card">
+  <a class="drumbeat-card__media" href={href}>
+    <img
+      src={coverImage.src}
+      width={coverImage.width}
+      height={coverImage.height}
+      alt={coverImageAlt}
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <div class="drumbeat-card__content">
+    <div class="drumbeat-card__meta">
+      <span>{publishedAt}</span>
+      <span class="drumbeat-card__badge">{format}</span>
+    </div>
+
+    <h2 class="card__title">
+      <a href={href}>{title}</a>
+    </h2>
+
+    <p class="drumbeat-card__summary">{description}</p>
+  </div>
+</article>

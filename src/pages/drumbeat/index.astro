@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import DrumbeatCard from "../../components/DrumbeatCard.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import { site } from "../../data/site";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" });
+const formatLabel = (format: "text" | "image" | "video" | "audio" | "mixed") =>
+  format === "mixed" ? "Mixed media" : `${format.charAt(0).toUpperCase()}${format.slice(1)}`;
+const entries = (await getCollection("drumbeat", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+---
+
+<BaseLayout
+  title="Drumbeat | Tech of Our Own"
+  description="Drumbeat is the canonical home for the public voice of Tech of Our Own."
+>
+  <main class="site-page">
+    <SiteNav />
+    <div class="site-main">
+      <section class="section-block">
+        <p class="site-hero__eyebrow">Drumbeat</p>
+        <h1 class="section-block__title">The public feed.</h1>
+        <p class="section-block__lede">
+          Drumbeat is the canonical home for the public voice of Tech of Our Own: articles, image
+          posts, videos, and future audio. Platforms are distribution. This site is the home.
+        </p>
+        <p class="section-block__lede">Journal is for project milestones. Drumbeat is for the message.</p>
+      </section>
+
+      {
+        entries.length > 0 ? (
+          <section class="collection-grid">
+            {entries.map((entry) => (
+              <DrumbeatCard
+                href={`/drumbeat/${entry.id}/`}
+                title={entry.data.title}
+                description={entry.data.summary ?? entry.data.description}
+                publishedAt={dateFormatter.format(entry.data.publishedAt)}
+                format={formatLabel(entry.data.format)}
+                coverImage={entry.data.coverImage}
+                coverImageAlt={entry.data.coverImageAlt}
+              />
+            ))}
+          </section>
+        ) : (
+          <div class="empty-state">No Drumbeat entries yet.</div>
+        )
+      }
+    </div>
+    <SiteFooter
+      description="Drumbeat is the canonical public feed. Platforms distribute it, but the site is the home."
+      links={[
+        { href: "/ourbox/", label: "Explore OurBox" },
+        { href: site.githubOrgUrl, label: "View the GitHub org", external: true },
+      ]}
+    />
+  </main>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  label: string;
+  href: string;
+  title: string;
+  description: string;
+  source?: string;
+}
+
+const { label, href, title, description, source } = Astro.props;
+---
+
+<article class="card related-link-card">
+  <p class="collection-card__eyebrow">{label}</p>
+
+  <h2 class="card__title">
+    <a href={href} target="_blank" rel="noreferrer">
+      {title}
+    </a>
+  </h2>
+
+  <div class="card__body">
+    <p>{description}</p>
+    {source && <p class="related-link-card__source">Source: {source}</p>}
+  </div>
+
+  <a class="related-link-card__link" href={href} target="_blank" rel="noreferrer">
+    Open link
+  </a>
+</article>

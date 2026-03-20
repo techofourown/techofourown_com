@@ -4,9 +4,10 @@ interface Props {
   videoUrl: string;
   runtime?: string;
   difficulty?: string;
+  poster?: string;
 }
 
-const { title, videoUrl, runtime, difficulty } = Astro.props;
+const { title, videoUrl, runtime, difficulty, poster } = Astro.props;
 const metadata = [
   ...(runtime ? [{ label: "Runtime", value: runtime }] : []),
   ...(difficulty ? [{ label: "Difficulty", value: difficulty }] : []),
@@ -26,7 +27,7 @@ const metadata = [
   )}
 
   <div class="video-player__frame">
-    <video controls preload="metadata" playsinline>
+    <video controls preload="metadata" playsinline poster={poster}>
       <source src={videoUrl} type="video/mp4" />
       Your browser does not support HTML5 video.
     </video>

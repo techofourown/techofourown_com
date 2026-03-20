@@ -16,6 +16,10 @@ interface Props {
   metaItems?: MetaItem[];
   robots?: string;
   referrer?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: string;
+  publishedTime?: string;
 }
 
 const {
@@ -25,10 +29,23 @@ const {
   metaItems = [],
   robots,
   referrer,
+  ogImage,
+  ogImageAlt,
+  ogType,
+  publishedTime,
 } = Astro.props;
 ---
 
-<BaseLayout title={`${title} | ${site.name}`} description={description} robots={robots} referrer={referrer}>
+<BaseLayout
+  title={`${title} | ${site.name}`}
+  description={description}
+  robots={robots}
+  referrer={referrer}
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
+  ogType={ogType}
+  publishedTime={publishedTime}
+>
   <main class="site-page">
     <SiteNav />
 

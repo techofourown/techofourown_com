@@ -99,6 +99,44 @@ const apps = defineCollection({
   }),
 });
 
+const drumbeat = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/drumbeat" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      summary: z.string().optional(),
+      draft: z.boolean().default(false),
+      publishedAt: z.coerce.date(),
+      format: z.enum(["text", "image", "video", "audio", "mixed"]).default("text"),
+      runtime: z.string().optional(),
+      series: z.string().optional(),
+      coverImage: image(),
+      coverImageAlt: z.string(),
+      videoUrl: z.url().optional(),
+      audioUrl: z.url().optional(),
+      mirrors: z
+        .array(
+          z.object({
+            label: z.string(),
+            href: z.url(),
+          }),
+        )
+        .default([]),
+      links: z
+        .array(
+          z.object({
+            label: z.string(),
+            href: z.url(),
+            title: z.string(),
+            description: z.string(),
+            source: z.string().optional(),
+          }),
+        )
+        .default([]),
+    }),
+});
+
 export const collections = {
   learn,
   build,
@@ -107,4 +145,5 @@ export const collections = {
   decisions,
   rfcs,
   apps,
+  drumbeat,
 };
