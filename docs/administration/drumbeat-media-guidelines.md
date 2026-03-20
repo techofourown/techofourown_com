@@ -16,6 +16,47 @@ House intent:
 - is not assumed to be safe as a thumbnail
 - is not assumed to be safe as a share image
 
+## Detail-page cover presentation
+
+### `coverImagePresentation: "full"`
+
+Use for:
+
+- illustration
+- photography
+- artwork
+- image posts where the image should read as a normal large editorial image
+
+House behavior:
+
+- rendered wide on the detail page
+- house max width: `900px`
+- no inner padding panel
+
+### `coverImagePresentation: "framed"`
+
+Use for:
+
+- title cards
+- GitHub OG cards
+- screenshot-like graphics
+- text-forward graphics
+- UI cards
+- social-preview-style graphics
+
+House behavior:
+
+- rendered in a padded neutral frame
+- house max width: `760px`
+- preserves the graphic as a graphic instead of pretending it is a photo
+
+### Hard rules
+
+- Never render a text-forward title card as a raw full-width detail image.
+- Published text posts must use `coverImagePresentation: "framed"`.
+- If the asset would look wrong as a giant poster on the entry page, it is a `framed` case.
+- `cardImageFit` does not control detail-page rendering.
+
 ### `cardImage`
 
 Used on `/` and `/drumbeat/`.
@@ -72,6 +113,7 @@ House standard:
 Create:
 
 - `coverImage`: the detail-page title card, usually `1600 × 900`
+- `coverImagePresentation`: `framed`
 - `cardImage`: either a safer `1600 × 1000` or `1200 × 900` version, or reuse the title card with `cardImageFit: contain`
 - `shareImage`: a dedicated `1200 × 630` social image
 
@@ -80,6 +122,7 @@ Create:
 Create:
 
 - `coverImage`: original artwork
+- `coverImagePresentation`: usually `full`
 - `cardImage`: reuse artwork if crop-safe, otherwise export a thumbnail variant
 - `shareImage`: dedicated `1200 × 630` share crop or padded adaptation
 
@@ -88,5 +131,6 @@ Create:
 Create:
 
 - `coverImage`: the full screenshot if it serves the detail page
+- `coverImagePresentation`: `framed`
 - `cardImage`: usually the same file with `cardImageFit: contain`, unless you make a dedicated thumbnail
 - `shareImage`: a dedicated `1200 × 630` graphic, not the raw screenshot

@@ -584,7 +584,6 @@ a {
   gap: 24px;
 }
 
-.drumbeat-media,
 .video-player {
   max-width: 900px;
   margin-inline: auto;
@@ -593,20 +592,53 @@ a {
 .drumbeat-media {
   display: grid;
   gap: 12px;
+  margin-inline: auto;
 }
 
-.drumbeat-media img,
+.drumbeat-media--full {
+  width: min(100%, 900px);
+}
+
+.drumbeat-media--framed {
+  width: min(100%, 760px);
+}
+
+.drumbeat-media__frame {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+.drumbeat-media--full .drumbeat-media__frame {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.drumbeat-media--full img {
+  width: 100%;
+  height: auto;
+}
+
+.drumbeat-media--framed .drumbeat-media__frame {
+  padding: clamp(16px, 2vw, 24px);
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #f7f9fc, #eef3f8);
+  box-shadow: var(--shadow-soft);
+}
+
+.drumbeat-media--framed img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
 .drumbeat-media audio {
   width: 100%;
 }
 
-.drumbeat-media img {
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
-}
-
 .drumbeat-media--audio {
+  width: min(100%, 900px);
   padding: 24px;
   border-radius: var(--radius-card);
   border: 1px solid var(--border);

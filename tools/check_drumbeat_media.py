@@ -35,6 +35,7 @@ class EntryReport:
     cover_path: Path | None = None
     card_ratio: float | None = None
     share_ratio: float | None = None
+    cover_presentation: str = "full"
 
 
 def parse_args() -> argparse.Namespace:
@@ -144,9 +145,11 @@ def validate_entry(entry_path: Path) -> EntryReport:
     cover_path = resolve_media_path(entry_path, frontmatter.get("coverImage"))
     card_path = resolve_media_path(entry_path, frontmatter.get("cardImage"))
     share_path = resolve_media_path(entry_path, frontmatter.get("shareImage"))
+    cover_presentation = frontmatter.get("coverImagePresentation", "full")
     report.cover_path = cover_path
     report.card_path = card_path
     report.share_path = share_path
+    report.cover_presentation = str(cover_presentation)
 
     if cover_path is None:
         report.failures.append("coverImage is missing.")
@@ -165,10 +168,14 @@ def validate_entry(entry_path: Path) -> EntryReport:
 
     if "cardImageFit" not in frontmatter:
         report.failures.append("cardImageFit is missing.")
+    if "coverImagePresentation" not in frontmatter:
+        report.failures.append("coverImagePresentation is missing.")
 
     card_fit = frontmatter.get("cardImageFit")
     if card_fit not in {"cover", "contain", None}:
         report.failures.append(f"cardImageFit has invalid value: {card_fit}")
+    if cover_presentation not in {"full", "framed"}:
+        report.failures.append(f"coverImagePresentation has invalid value: {cover_presentation}")
 
     if card_path and card_path.exists():
         report.card_ratio = image_ratio(card_path)
@@ -197,6 +204,12 @@ def validate_entry(entry_path: Path) -> EntryReport:
                 f"{SAFE_SHARE_RATIO_MIN:.2f} to {SAFE_SHARE_RATIO_MAX:.2f}."
             )
 
+    if str(frontmatter.get("format")) == "text" and cover_presentation != "framed":
+        report.failures.append("published text post must use coverImagePresentation: framed.")
+    if card_fit == "contain" and cover_presentation != "framed":
+        report.warnings.append("contain cardImageFit usually implies a framed detail-page cover.")
+    if same_path(cover_path, share_path) and cover_presentation != "framed":
+        report.warnings.append("coverImage is being reused as shareImage without framed detail presentation.")
     if str(frontmatter.get("format")) == "text" and same_path(card_path, cover_path):
         report.warnings.append("text post is reusing coverImage as cardImage; a dedicated card asset is preferred.")
 
@@ -268,6 +281,48 @@ def render_share_slot(image_path: Path | None, size: tuple[int, int]) -> Image.I
     return panel
 
 
+def render_detail_slot(image_path: Path | None, size: tuple[int, int], presentation: str) -> Image.Image:
+    if image_path is None or not image_path.exists():
+        return draw_placeholder(size, "Missing coverImage")
+
+    panel = Image.new("RGB", size, ImageColor.getrgb("#ffffff"))
+    image = open_rgb(image_path)
+    outer_pad = 18
+    frame_height = size[1] - outer_pad * 2
+    full_width = size[0] - outer_pad * 2
+    frame_width = full_width if presentation == "full" else int(full_width * (760 / 900))
+    frame_x = (size[0] - frame_width) // 2
+    frame_y = outer_pad
+    frame_box = (frame_x, frame_y, frame_x + frame_width, frame_y + frame_height)
+
+    draw = ImageDraw.Draw(panel)
+    draw.rectangle((0, 0, size[0] - 1, size[1] - 1), outline="#e2e8f0", width=2)
+
+    if presentation == "framed":
+        draw.rounded_rectangle(frame_box, radius=20, fill="#f2f6fb", outline="#cbd5e1", width=2)
+        inner_pad = 20
+        inner_width = max(1, frame_width - inner_pad * 2)
+        inner_height = max(1, frame_height - inner_pad * 2)
+        contained = ImageOps.contain(image, (inner_width, inner_height), Image.Resampling.LANCZOS)
+        image_x = frame_x + (frame_width - contained.width) // 2
+        image_y = frame_y + (frame_height - contained.height) // 2
+        panel.paste(contained, (image_x, image_y))
+        draw.rounded_rectangle(
+            (image_x, image_y, image_x + contained.width, image_y + contained.height),
+            radius=14,
+            outline="#d6dce5",
+            width=2,
+        )
+        return panel
+
+    draw.rounded_rectangle(frame_box, radius=20, fill="#ffffff", outline="#cbd5e1", width=2)
+    contained = ImageOps.contain(image, (frame_width, frame_height), Image.Resampling.LANCZOS)
+    image_x = frame_x + (frame_width - contained.width) // 2
+    image_y = frame_y + (frame_height - contained.height) // 2
+    panel.paste(contained, (image_x, image_y))
+    return panel
+
+
 def status_text(report: EntryReport) -> str:
     if report.failures:
         return "FAIL"
@@ -277,7 +332,7 @@ def status_text(report: EntryReport) -> str:
 
 
 def build_entry_report(report: EntryReport, output_path: Path) -> None:
-    width, height = 1680, 610
+    width, height = 2290, 640
     canvas = Image.new("RGB", (width, height), ImageColor.getrgb("#ffffff"))
     draw = ImageDraw.Draw(canvas)
 
@@ -289,6 +344,7 @@ def build_entry_report(report: EntryReport, output_path: Path) -> None:
         ("Card 4:3", (40, 150), (420, 315), render_card_slot(report.card_path, (420, 315), report.frontmatter.get("cardImageFit"), report.frontmatter.get("cardImagePosition"))),
         ("Card 16:10", (500, 150), (504, 315), render_card_slot(report.card_path, (504, 315), report.frontmatter.get("cardImageFit"), report.frontmatter.get("cardImagePosition"))),
         ("Share 1200×630", (1044, 150), (600, 315), render_share_slot(report.share_path, (600, 315))),
+        ("Detail cover", (1684, 150), (560, 315), render_detail_slot(report.cover_path, (560, 315), report.cover_presentation)),
     ]
 
     for label, origin, _size, panel in slots:
@@ -300,6 +356,7 @@ def build_entry_report(report: EntryReport, output_path: Path) -> None:
         details.append(f"card ratio: {report.card_ratio:.2f}")
     if report.share_ratio is not None:
         details.append(f"share ratio: {report.share_ratio:.2f}")
+    details.append(f"cover presentation: {report.cover_presentation}")
     if report.frontmatter.get("cardImageFit"):
         details.append(f"fit: {report.frontmatter.get('cardImageFit')}")
     if report.frontmatter.get("cardImagePosition"):
@@ -315,7 +372,7 @@ def build_entry_report(report: EntryReport, output_path: Path) -> None:
     y = 530
     for kind, message in lines[:4]:
         fill = "#b91c1c" if kind == "FAIL" else "#b45309" if kind == "WARN" else "#166534"
-        wrapped = textwrap.fill(message, width=100)
+        wrapped = textwrap.fill(message, width=140)
         draw.multiline_text((40, y), f"{kind}: {wrapped}", fill=fill, font=FONT_META, spacing=4)
         y += 28 * (wrapped.count("\n") + 1)
 
@@ -359,6 +416,7 @@ def write_summary(reports: list[EntryReport], summary_path: Path) -> None:
             lines.append(f"  card ratio: {report.card_ratio:.2f}")
         if report.share_ratio is not None:
             lines.append(f"  share ratio: {report.share_ratio:.2f}")
+        lines.append(f"  cover presentation: {report.cover_presentation}")
         for item in report.failures:
             lines.append(f"  FAIL: {item}")
         for item in report.warnings:

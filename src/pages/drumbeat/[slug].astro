@@ -18,6 +18,7 @@ const { Content } = await render(entry);
 const publishedDate = dateFormatter.format(entry.data.publishedAt);
 const shareImage = entry.data.shareImage ?? entry.data.coverImage;
 const shareImageAlt = entry.data.shareImageAlt ?? entry.data.coverImageAlt;
+const coverImagePresentation = entry.data.coverImagePresentation ?? "full";
 const metaItems = [
   { label: "Published", value: publishedDate },
   { label: "Format", value: formatLabel(entry.data.format) },
@@ -55,13 +56,21 @@ const metaItems = [
           </p>
         </section>
       ) : (
-        <figure class="drumbeat-media">
-          <img
-            src={entry.data.coverImage.src}
-            width={entry.data.coverImage.width}
-            height={entry.data.coverImage.height}
-            alt={entry.data.coverImageAlt}
-          />
+        <figure
+          class:list={{
+            "drumbeat-media": true,
+            "drumbeat-media--full": coverImagePresentation === "full",
+            "drumbeat-media--framed": coverImagePresentation === "framed",
+          }}
+        >
+          <div class="drumbeat-media__frame">
+            <img
+              src={entry.data.coverImage.src}
+              width={entry.data.coverImage.width}
+              height={entry.data.coverImage.height}
+              alt={entry.data.coverImageAlt}
+            />
+          </div>
         </figure>
       )
     }

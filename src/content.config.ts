@@ -113,6 +113,7 @@ const drumbeat = defineCollection({
       series: z.string().optional(),
       coverImage: image(),
       coverImageAlt: z.string(),
+      coverImagePresentation: z.enum(["full", "framed"]).default("full"),
       cardImage: image().optional(),
       cardImageAlt: z.string().optional(),
       cardImageFit: z.enum(["cover", "contain"]).default("cover"),

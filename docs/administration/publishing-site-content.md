@@ -58,7 +58,7 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    - `draft`
    - `publishedAt`
    - `format`
-   - `coverImage` and `coverImageAlt`
+   - `coverImage`, `coverImageAlt`, and explicit `coverImagePresentation`
    - `cardImage`, `cardImageAlt`, and explicit `cardImageFit`
    - `shareImage` and `shareImageAlt`
 3. If the entry has video, include `videoUrl` and `videoAspect` when needed.
@@ -68,6 +68,8 @@ Do not auto-publish the whole `docs/` tree. The public library is curated.
    `python3 -m pip install -r tools/requirements-media-check.txt`.
 6. Run `npm run check && npm run check:media && npm run build`.
 7. Verify the entry on `/`, `/drumbeat/`, and `/drumbeat/<slug>/`.
+   Confirm that the detail-page cover looks intentional on desktop and mobile.
+   Text-forward or OG-style covers must render in the framed presentation.
 
 ## Add a philosophy entry
 1. Create a Markdown file in `src/content/philosophy/`.
