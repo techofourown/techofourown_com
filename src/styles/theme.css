@@ -862,3 +862,247 @@ a {
     width: min(100%, 360px);
   }
 }
+
+/*
+Append-only navigation upgrade.
+The new navigation uses app-nav* classes so it can ship safely before the old site-nav* rules are deleted.
+*/
+
+.app-nav {
+  position: sticky;
+  top: 16px;
+  z-index: 30;
+  overflow: visible;
+}
+
+.app-nav__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.app-nav__brand {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 1.04rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-nav__brand--active {
+  color: var(--ink);
+}
+
+.app-nav__primary {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.app-nav__primary-link {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.app-nav__primary-link:hover,
+.app-nav__primary-link--active {
+  background: #eff6ff;
+  color: var(--ink);
+}
+
+.app-nav__menu {
+  position: static;
+  margin-left: auto;
+}
+
+.app-nav__summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+.app-nav__summary::-webkit-details-marker {
+  display: none;
+}
+
+.app-nav__summary::after {
+  content: "☰";
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.app-nav__menu[open] > .app-nav__summary::after {
+  content: "✕";
+}
+
+.app-nav__summary-label--open {
+  display: none;
+}
+
+.app-nav__menu[open] > .app-nav__summary .app-nav__summary-label--closed {
+  display: none;
+}
+
+.app-nav__menu[open] > .app-nav__summary .app-nav__summary-label--open {
+  display: inline;
+}
+
+.app-nav__brand:focus-visible,
+.app-nav__primary-link:focus-visible,
+.app-nav__summary:focus-visible,
+.app-nav__panel-link:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.32);
+  outline-offset: 2px;
+}
+
+.app-nav__panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(420px, calc(100vw - 48px));
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 18px;
+}
+
+.app-nav__panel-header {
+  display: grid;
+  gap: 4px;
+}
+
+.app-nav__eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.app-nav__panel-title {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.15;
+}
+
+.app-nav__section {
+  display: grid;
+  gap: 10px;
+}
+
+.app-nav__section-title {
+  margin: 0;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.app-nav__links {
+  display: grid;
+  gap: 8px;
+}
+
+.app-nav__panel-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.app-nav__panel-link:hover,
+.app-nav__panel-link--active {
+  background: #eff6ff;
+  border-color: rgba(37, 99, 235, 0.14);
+}
+
+.app-nav__panel-link-meta {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+@media (min-width: 980px) {
+  .app-nav__bar {
+    min-height: 70px;
+    padding: 12px 16px;
+  }
+
+  .app-nav__primary {
+    display: flex;
+  }
+
+  .app-nav__menu {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 979px) {
+  .app-nav__panel {
+    left: 0;
+    right: 0;
+    width: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-nav {
+    top: 12px;
+  }
+
+  .app-nav__bar {
+    min-height: 58px;
+    padding: 9px 12px;
+    border-radius: 18px;
+  }
+
+  .app-nav__brand {
+    font-size: 1rem;
+  }
+
+  .app-nav__panel {
+    max-height: calc(100vh - 96px);
+  }
+}

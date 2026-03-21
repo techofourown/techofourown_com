@@ -1,52 +1,97 @@
 ---
-import { navItems } from "../data/nav";
+import { menuSections, primaryNavItems } from "../data/nav";
 import { site } from "../data/site";
 
 const currentPath = Astro.url.pathname;
-const linkItems = navItems.filter((item) => !item.action);
-const actionItems = navItems.filter((item) => item.action);
 
-const isActive = (href: string) => {
+const pathIsActive = (href: string, matchPrefixes: string[] = []) => {
   if (href === "/") {
     return currentPath === "/";
   }
 
-  const normalized = href.startsWith("/") ? href : `/${href}`;
-  return currentPath === normalized || currentPath.startsWith(`${normalized}/`);
+  const prefixes = matchPrefixes.length > 0 ? matchPrefixes : [href];
+  return prefixes.some((prefix) =>
+    prefix === "/"
+      ? currentPath === "/"
+      : currentPath === prefix || currentPath.startsWith(prefix),
+  );
 };
+
+const itemIsActive = (item: { href: string; external?: boolean; matchPrefixes?: string[] }) =>
+  !item.external && pathIsActive(item.href, item.matchPrefixes);
+
+const brandIsActive = currentPath === "/";
 ---
 
-<nav class="site-nav" aria-label="Primary">
-  <a class="site-nav__brand" href="/">{site.name}</a>
+<nav class="app-nav" aria-label="Primary">
+  <div class="app-nav__bar">
+    <a
+      class:list={{
+        "app-nav__brand": true,
+        "app-nav__brand--active": brandIsActive,
+      }}
+      href="/"
+      aria-current={brandIsActive ? "page" : undefined}
+    >
+      {site.name}
+    </a>
 
-  <div class="site-nav__links">
-    {
-      linkItems.map((item) => (
-        <a
-          class:list={{
-            "site-nav__link": true,
-            "site-nav__link--active": !item.external && isActive(item.href),
-          }}
-          href={item.href}
-        >
-          {item.label}
-        </a>
-      ))
-    }
-  </div>
+    <div class="app-nav__primary" aria-label="Primary links">
+      {
+        primaryNavItems.map((item) => (
+          <a
+            class:list={{
+              "app-nav__primary-link": true,
+              "app-nav__primary-link--active": itemIsActive(item),
+            }}
+            href={item.href}
+            aria-current={itemIsActive(item) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
 
-  <div class="site-nav__actions">
-    {
-      actionItems.map((item) => (
-        <a
-          class="button button--secondary"
-          href={item.href}
-          target={item.external ? "_blank" : undefined}
-          rel={item.external ? "noreferrer" : undefined}
-        >
-          {item.label}
-        </a>
-      ))
-    }
+    <details class="app-nav__menu">
+      <summary class="app-nav__summary">
+        <span class="app-nav__summary-label app-nav__summary-label--closed">Menu</span>
+        <span class="app-nav__summary-label app-nav__summary-label--open">Close</span>
+      </summary>
+
+      <div class="app-nav__panel">
+        <div class="app-nav__panel-header">
+          <p class="app-nav__eyebrow">Browse</p>
+          <h2 class="app-nav__panel-title">All destinations</h2>
+        </div>
+
+        {
+          menuSections.map((section) => (
+            <section class="app-nav__section">
+              <h3 class="app-nav__section-title">{section.title}</h3>
+              <div class="app-nav__links">
+                {
+                  section.items.map((item) => (
+                    <a
+                      class:list={{
+                        "app-nav__panel-link": true,
+                        "app-nav__panel-link--active": itemIsActive(item),
+                      }}
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                      aria-current={itemIsActive(item) ? "page" : undefined}
+                    >
+                      <span>{item.label}</span>
+                      {item.external && <span class="app-nav__panel-link-meta">External</span>}
+                    </a>
+                  ))
+                }
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </details>
   </div>
 </nav>
