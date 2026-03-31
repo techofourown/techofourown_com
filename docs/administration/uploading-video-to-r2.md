@@ -8,23 +8,18 @@ the architectural decision behind this setup.
 
 ## Credentials
 
-All Cloudflare credentials for this workflow are stored on **centroid** at:
+This workflow requires the following Cloudflare credentials:
 
-```
-/home/johnb/cloudflare token.txt
-```
+| Credential | Used for |
+|---|---|
+| R2 access key ID | rclone R2 remote (`too-media`) |
+| R2 secret access key | rclone R2 remote (`too-media`) |
+| Account ID | rclone endpoint URL |
+| Cache purge token | Cloudflare Cache Purge API |
+| Zone ID (`techofourown.com`) | Cache purge API calls |
 
-The file contains:
-
-| Key | Used for |
-|-----|----------|
-| `access key ID` | rclone R2 remote (`too-media`) |
-| `secret access key` | rclone R2 remote (`too-media`) |
-| `account id` | rclone endpoint URL |
-| `s3 api` | rclone endpoint URL |
-| `token value` | General Cloudflare API token (R2 scope) |
-| `cache purge token` | Cloudflare Cache Purge API |
-| `zone id (techofourown.com)` | Cache purge API calls |
+Credential storage and access procedures are documented in
+`ops-techofourown-private` (see `platform-ops/cloudflare-credentials.md`).
 
 Do not commit credential values to this repository.
 
@@ -36,8 +31,8 @@ Do not commit credential values to this repository.
 
 ## Configure rclone
 
-The `too-media` rclone remote is already configured on centroid. On a new machine, set it up
-using the credentials from centroid:
+The `too-media` rclone remote is already configured on the control machine. On a new machine,
+set it up using the Cloudflare R2 credentials (see `ops-techofourown-private` for access):
 
 ```bash
 rclone config create too-media s3 \
@@ -179,7 +174,7 @@ rclone copyto \
 
 ### Step 2 — Purge the cache
 
-Use the cache purge token from centroid's credentials file:
+Use the cache purge token (see `ops-techofourown-private` for access):
 
 ```bash
 curl -X POST "https://api.cloudflare.com/client/v4/zones/28d253589f420799fba7af3db433b470/purge_cache" \
